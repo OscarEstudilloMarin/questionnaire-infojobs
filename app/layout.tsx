@@ -1,6 +1,9 @@
 import '../styles/globals.css'
+
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
+
+import TailwindIndicator from '@/components/tailwind-indicator'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -19,6 +22,7 @@ export default function RootLayout({
             <body className={inter.className}>
                 <Header />
                 {children}
+                <TailwindIndicator />
             </body>
         </html>
     )
