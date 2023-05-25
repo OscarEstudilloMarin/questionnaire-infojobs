@@ -1,3 +1,25 @@
+'use client'
+
+import OfferCard from '@/components/offer-card'
+import useOffers from '@/hooks/useOffers'
+
 export default function Home() {
-    return <main className="flex flex-1">Hola</main>
+    const { offers } = useOffers()
+
+    return (
+        <main
+            className="overflow-y-auto p-10"
+            style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                gridGap: '1rem',
+            }}
+        >
+            {offers && offers.length > 0
+                ? offers.map((offer) => (
+                      <OfferCard key={offer.id} offer={offer} />
+                  ))
+                : null}
+        </main>
+    )
 }
