@@ -11,14 +11,12 @@ export default function SignUpRedirect() {
         <div className="flex w-full gap-2">
             <Button
                 className="w-full"
-                variant="secondary"
                 onClick={() => router.push('/register/employer')}
             >
                 Empresa
             </Button>
             <Button
                 className="w-full"
-                variant="secondary"
                 onClick={() => router.push('/register/candidate')}
             >
                 Candidato
