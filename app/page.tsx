@@ -1,7 +1,7 @@
 'use client'
 
 import OfferCard from '@/components/offer-card'
-import useOffers from '@/hooks/useOffers'
+import useOffers from '@/hooks/use-offers'
 
 export default function Home() {
     const { offers } = useOffers()

@@ -17,17 +17,12 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import useUser from '@/hooks/use-user'
 
-export default function UserMenuDropdown({ user }: { user: User | null }) {
-    const supabase = createClientComponentClient()
-    const router = useRouter()
-
+export default function UserMenuDropdown() {
     const [open, setOpen] = useState(false)
 
-    const handleSignOut = async () => {
-        await supabase.auth.signOut()
-        router.refresh()
-    }
+    const { logout, user } = useUser()
 
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -47,14 +42,16 @@ export default function UserMenuDropdown({ user }: { user: User | null }) {
                         />
                         <AvatarFallback>SC</AvatarFallback>
                     </Avatar>
-                    <p className="truncate">{user?.user_metadata.first_name}</p>
+                    <p className="truncate">
+                        {user?.user_metadata?.first_name}
+                    </p>
                     <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[180px] p-2">
                 <DropdownMenuGroup>
                     <DropdownMenuItem
-                        onSelect={handleSignOut}
+                        onSelect={logout}
                         className="cursor-pointer"
                     >
                         <LogOut className="mr-2 h-4 w-4" />

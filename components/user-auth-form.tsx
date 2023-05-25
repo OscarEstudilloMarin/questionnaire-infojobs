@@ -1,12 +1,10 @@
 'use client'
 
 import { useState } from 'react'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
-import useUserStore from '@/hooks/use-user-store'
 
 import { cn } from '@/lib/utils'
 import { userAuthSchema } from '@/lib/validations/auth'
@@ -14,16 +12,13 @@ import { Icons } from '@/components/icons'
 import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { useToast } from '@/hooks/use-toast'
-
-interface UserSignUpFormProps extends React.HTMLAttributes<HTMLDivElement> {}
+import useUser from '@/hooks/use-user'
 
 type FormData = z.infer<typeof userAuthSchema>
 
 export default function LoginForm() {
     const router = useRouter()
-    const supabase = createClientComponentClient()
-    const { toast } = useToast()
+    const { login } = useUser()
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -38,35 +33,12 @@ export default function LoginForm() {
 
     async function onSubmit(data: FormData) {
         setIsLoading(true)
-
         try {
-            const { data: user, error } =
-                await supabase.auth.signInWithPassword({
-                    email: data.email,
-                    password: data.password,
-                })
-
-            console.log('USER', user)
-            useUserStore.setState({ user: user.user })
-
-            if (error) {
-                toast({
-                    title: 'Error',
-                    description: error.message,
-                    variant: 'destructive',
-                })
-                return null
-            }
-
+            await login(data)
             reset()
-            router.refresh()
             router.push('/')
-        } catch (error: any) {
-            toast({
-                title: 'Error',
-                description: 'Something went wrong',
-                variant: 'destructive',
-            })
+        } catch (error) {
+            console.log(error)
         } finally {
             setIsLoading(false)
         }

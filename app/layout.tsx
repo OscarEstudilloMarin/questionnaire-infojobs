@@ -3,10 +3,6 @@ import Header from '@/components/header'
 import { Toaster } from '@/components/ui/toaster'
 import TailwindIndicator from '@/components/tailwind-indicator'
 
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import type { Database } from '@/lib/database.types'
-
 import '../styles/globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -21,20 +17,10 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-    const supabase = createServerComponentClient<Database>({ cookies })
-
-    const {
-        data: { session },
-    } = await supabase.auth.getSession()
-
-    const {
-        data: { user },
-    } = await supabase.auth.getUser()
-
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Header session={session} user={user} />
+                <Header />
                 {children}
                 <Toaster />
                 <TailwindIndicator />
