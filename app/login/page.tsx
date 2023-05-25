@@ -17,12 +17,6 @@ export const metadata: Metadata = {
 }
 
 export default async function LoginPage() {
-    const supabase = createServerComponentClient<Database>({ cookies })
-
-    const {
-        data: { session },
-    } = await supabase.auth.getSession()
-
     return (
         <div className="relative flex h-full w-full flex-col items-center justify-center px-10">
             <Link
@@ -46,7 +40,7 @@ export default async function LoginPage() {
                         Introduce email y contraseña
                     </p>
                 </div>
-                <LoginForm session={session} />
+                <LoginForm />
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center">
                         <span className="w-full border-t border-slate-300" />
