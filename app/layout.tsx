@@ -4,6 +4,8 @@ import { Toaster } from '@/components/ui/toaster'
 import TailwindIndicator from '@/components/tailwind-indicator'
 
 import '../styles/globals.css'
+import BasePage from '@/components/common/layout/base-page/base-page'
+import MainLayout from '@/components/common/layout/main-layout/main-layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,10 +22,12 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Header />
-                {children}
-                <Toaster />
-                <TailwindIndicator />
+                <MainLayout>
+                    <Header />
+                    <BasePage>{children}</BasePage>
+                    <Toaster />
+                    <TailwindIndicator />
+                </MainLayout>
             </body>
         </html>
     )
