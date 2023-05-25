@@ -2,15 +2,14 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-
+import type { Database } from '@/lib/database.types'
 import { cn } from '@/lib/utils'
+
 import { Icons } from '@/components/icons'
 import { Button, buttonVariants } from '@/components/ui/button'
 
 import LoginForm from '@/components/user-auth-form'
-
-import { useRouter } from 'next/navigation'
-import type { Database } from '@/lib/database.types'
+import SignUpRedirect from '@/components/sign-up-redirect'
 
 export const metadata: Metadata = {
     title: 'Login',
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
 }
 
 export default async function LoginPage() {
-    // const router = useRouter()
     const supabase = createServerComponentClient<Database>({ cookies })
 
     const {
@@ -59,22 +57,7 @@ export default async function LoginPage() {
                         </span>
                     </div>
                 </div>
-                {/* <div className="flex w-full gap-2">
-                    <Button
-                        className="w-full"
-                        variant="secondary"
-                        onClick={() => router.push('/register/employer')}
-                    >
-                        Empresa
-                    </Button>
-                    <Button
-                        className="w-full"
-                        variant="secondary"
-                        onClick={() => router.push('/register/candidate')}
-                    >
-                        Candidato
-                    </Button>
-                </div> */}
+                <SignUpRedirect />
             </div>
         </div>
     )

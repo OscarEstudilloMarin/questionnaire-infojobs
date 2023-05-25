@@ -1,12 +1,12 @@
 'use client'
 
 import * as React from 'react'
-import { useRouter, useSearchParams } from 'next/navigation'
-import { toast } from '@/hooks/use-toast'
+import { useRouter } from 'next/navigation'
+import { useToast } from '@/hooks/use-toast'
 import { zodResolver } from '@hookform/resolvers/zod'
-import useUser from '@/hooks/useUser'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
 import { cn } from '@/lib/utils'
 import { userAuthSchema } from '@/lib/validations/auth'
@@ -21,54 +21,77 @@ type FormData = z.infer<typeof userAuthSchema>
 
 export function UserSignUpForm({ className, ...props }: UserSignUpFormProps) {
     const router = useRouter()
-    const { signUp } = useUser()
+    const { toast } = useToast()
+    const supabase = createClientComponentClient()
 
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<FormData>({
         resolver: zodResolver(userAuthSchema),
     })
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
-    const searchParams = useSearchParams()
 
     async function onSubmit(data: FormData) {
         setIsLoading(true)
-
-        const { data: loginData, error } = await signUp({
-            email: data.email.toLowerCase(),
-            password: data.password,
-        })
-
-        setIsLoading(false)
-
-        if (data) {
-            router.push('/')
-            return toast({
-                title: 'Registro exitoso',
-                description: 'Gracias por confiar en infojobs.',
-                variant: 'success',
+        try {
+            await supabase.auth.signUp({
+                email: data.email,
+                password: data.password,
+                options: {
+                    data: {
+                        first_name: data.name,
+                        type: 'candidate',
+                    },
+                    emailRedirectTo: `${location.origin}/auth/callback`,
+                },
             })
-        }
 
-        if (error) {
-            return toast({
+            toast({
+                title: 'Registro exitoso',
+                description:
+                    'Hemos enviado un correo de confirmación a tu email.',
+                variant: 'default',
+            })
+
+            reset()
+
+            router.refresh()
+        } catch (error: any) {
+            toast({
                 title: 'Registro fallido',
                 description: 'Algo salió mal, por favor intenta de nuevo.',
                 variant: 'destructive',
             })
+        } finally {
+            setIsLoading(false)
         }
     }
 
     return (
         <div className={cn('grid gap-6', className)} {...props}>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid gap-2">
-                    <div className="grid gap-1">
-                        <Label className="sr-only" htmlFor="email">
-                            Email
-                        </Label>
+                <div className="grid gap-3">
+                    <div className="grid gap-2">
+                        <Label htmlFor="email">Nombre</Label>
+                        <Input
+                            id="name"
+                            placeholder="john"
+                            type="text"
+                            autoCapitalize="none"
+                            autoCorrect="off"
+                            disabled={isLoading}
+                            {...register('name')}
+                        />
+                        {errors?.name && (
+                            <p className="px-1 text-xs text-red-600">
+                                {errors.name.message}
+                            </p>
+                        )}
+
+                        <Label htmlFor="email">Email</Label>
                         <Input
                             id="email"
                             placeholder="name@example.com"
@@ -84,9 +107,8 @@ export function UserSignUpForm({ className, ...props }: UserSignUpFormProps) {
                                 {errors.email.message}
                             </p>
                         )}
-                        <Label className="sr-only" htmlFor="email">
-                            Email
-                        </Label>
+
+                        <Label htmlFor="email">Password</Label>
                         <Input
                             id="password"
                             type="password"

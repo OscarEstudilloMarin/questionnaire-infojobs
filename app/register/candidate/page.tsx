@@ -1,22 +1,16 @@
-'use client'
-
-import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { Icons } from '@/components/icons'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { useRouter } from 'next/navigation'
 import { UserSignUpForm } from '@/components/user-sign-up-form'
 
-export const metadata: Metadata = {
-    title: 'Register',
-    description: 'Register candidate',
+export const metadata = {
+    title: 'Candidate register',
+    description: 'Improve your candidate selection process with us',
 }
 
 export default function LoginPage() {
-    const router = useRouter()
-
     return (
         <div className="relative flex h-full w-full flex-col items-center justify-center px-10">
             <Link

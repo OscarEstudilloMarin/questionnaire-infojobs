@@ -10,4 +10,8 @@ export const userAuthSchema = z.object({
             /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
             'La contraseña debe tener al menos una mayúscula, una minúscula, un número y un caracter especial'
         ),
+    name: z
+        .string()
+        .min(2, 'El nombre debe tener al menos 2 caracteres')
+        .optional(),
 })
