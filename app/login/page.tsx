@@ -1,21 +1,29 @@
-'use client'
-
 import { Metadata } from 'next'
 import Link from 'next/link'
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
 
 import { cn } from '@/lib/utils'
 import { Icons } from '@/components/icons'
 import { Button, buttonVariants } from '@/components/ui/button'
-import { UserAuthForm } from '@/components/user-auth-form'
+
+import LoginForm from '@/components/user-auth-form'
+
 import { useRouter } from 'next/navigation'
+import type { Database } from '@/lib/database.types'
 
 export const metadata: Metadata = {
     title: 'Login',
     description: 'Login to your account',
 }
 
-export default function LoginPage() {
-    const router = useRouter()
+export default async function LoginPage() {
+    // const router = useRouter()
+    const supabase = createServerComponentClient<Database>({ cookies })
+
+    const {
+        data: { session },
+    } = await supabase.auth.getSession()
 
     return (
         <div className="relative flex h-full w-full flex-col items-center justify-center px-10">
@@ -40,7 +48,7 @@ export default function LoginPage() {
                         Introduce email y contraseña
                     </p>
                 </div>
-                <UserAuthForm />
+                <LoginForm session={session} />
                 <div className="relative">
                     <div className="absolute inset-0 flex items-center">
                         <span className="w-full border-t border-slate-300" />
@@ -51,7 +59,7 @@ export default function LoginPage() {
                         </span>
                     </div>
                 </div>
-                <div className="flex w-full gap-2">
+                {/* <div className="flex w-full gap-2">
                     <Button
                         className="w-full"
                         variant="secondary"
@@ -66,7 +74,7 @@ export default function LoginPage() {
                     >
                         Candidato
                     </Button>
-                </div>
+                </div> */}
             </div>
         </div>
     )

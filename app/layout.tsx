@@ -1,10 +1,10 @@
-import { createServerComponentSupabaseClient } from '@supabase/auth-helpers-nextjs'
-import { headers, cookies } from 'next/headers'
-import SupabaseProvider from './supabase-provider'
-
 import { Inter } from 'next/font/google'
 import Header from '@/components/Header'
 import TailwindIndicator from '@/components/tailwind-indicator'
+
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { cookies } from 'next/headers'
+import type { Database } from '@/lib/database.types'
 
 import '../styles/globals.css'
 
@@ -20,10 +20,7 @@ export default async function RootLayout({
 }: {
     children: React.ReactNode
 }) {
-    const supabase = createServerComponentSupabaseClient({
-        headers,
-        cookies,
-    })
+    const supabase = createServerComponentClient<Database>({ cookies })
 
     const {
         data: { session },
@@ -32,11 +29,9 @@ export default async function RootLayout({
     return (
         <html lang="en">
             <body className={inter.className}>
-                <SupabaseProvider session={session}>
-                    <Header />
-                    {children}
-                    <TailwindIndicator />
-                </SupabaseProvider>
+                <Header session={session} />
+                {children}
+                <TailwindIndicator />
             </body>
         </html>
     )

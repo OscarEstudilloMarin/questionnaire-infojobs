@@ -1,107 +1,87 @@
 'use client'
 
-import * as React from 'react'
-import { useSearchParams } from 'next/navigation'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+
+import type { Session } from '@supabase/auth-helpers-nextjs'
+import { Input } from './ui/input'
+import { Button } from './ui/button'
 import { toast } from '@/hooks/use-toast'
-import { zodResolver } from '@hookform/resolvers/zod'
-import useUser from '@/hooks/useUser'
-import { useForm } from 'react-hook-form'
-import * as z from 'zod'
 
-import { cn } from '@/lib/utils'
-import { userAuthSchema } from '@/lib/validations/auth'
-import { Icons } from '@/components/icons'
-import { buttonVariants } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
+export default function LoginForm({ session }: { session: Session | null }) {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const router = useRouter()
+    const supabase = createClientComponentClient()
 
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-type FormData = z.infer<typeof userAuthSchema>
-
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
-    const { login } = useUser()
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm<FormData>({
-        resolver: zodResolver(userAuthSchema),
-    })
-    const [isLoading, setIsLoading] = React.useState<boolean>(false)
-    const searchParams = useSearchParams()
-
-    async function onSubmit(data: FormData) {
-        setIsLoading(true)
-
+    const handleSignUp = async () => {
         try {
-            const { data: loginData, error } = await login({
-                email: data.email.toLowerCase(),
-                password: data.password,
+            await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    emailRedirectTo: `${location.origin}/auth/callback`,
+                },
             })
-        } catch (error) {
-            return toast({
-                title: 'Login fallido',
-                description: 'Algo salió mal, por favor intenta de nuevo.',
+
+            toast({
+                title: 'Check your email',
+                description: 'We have sent you a confirmation email.',
+                variant: 'default',
+            })
+
+            router.refresh()
+        } catch (error: any) {
+            toast({
+                title: 'Error',
+                description: error.error_description,
                 variant: 'destructive',
             })
-        } finally {
-            setIsLoading(false)
         }
     }
 
-    return (
-        <div className={cn('grid gap-6', className)} {...props}>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid gap-2">
-                    <div className="grid gap-1">
-                        <Label className="sr-only" htmlFor="email">
-                            Email
-                        </Label>
-                        <Input
-                            id="email"
-                            placeholder="name@example.com"
-                            type="email"
-                            autoCapitalize="none"
-                            autoComplete="email"
-                            autoCorrect="off"
-                            disabled={isLoading}
-                            {...register('email')}
-                        />
-                        {errors?.email && (
-                            <p className="px-1 text-xs text-red-600">
-                                {errors.email.message}
-                            </p>
-                        )}
-                        <Label className="sr-only" htmlFor="email">
-                            Email
-                        </Label>
-                        <Input
-                            id="password"
-                            type="password"
-                            placeholder="password"
-                            autoCapitalize="none"
-                            disabled={isLoading}
-                            {...register('password')}
-                        />
-                        {errors?.password && (
-                            <p className="px-1 text-xs text-red-600">
-                                {errors.password.message}
-                            </p>
-                        )}
-                    </div>
-                    <button
-                        className={cn(buttonVariants())}
-                        disabled={isLoading}
-                    >
-                        {isLoading && (
-                            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                        )}
-                        Accede
-                    </button>
-                </div>
-            </form>
-        </div>
+    const handleSignIn = async () => {
+        try {
+            await supabase.auth.signInWithPassword({
+                email,
+                password,
+            })
+            router.refresh()
+            router.push('/')
+        } catch (error: any) {
+            toast({
+                title: 'Error',
+                description: error.error_description,
+                variant: 'destructive',
+            })
+        }
+    }
+
+    const handleSignOut = async () => {
+        await supabase.auth.signOut()
+        router.refresh()
+    }
+
+    // for the `session` to be available on first SSR render, it must be
+    // fetched in a Server Component and passed down as a prop
+    return session ? (
+        <Button onClick={handleSignOut}>Sign out</Button>
+    ) : (
+        <>
+            <Input
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+            />
+            <Input
+                type="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+                value={password}
+            />
+            <Button onClick={handleSignUp}>Sign up</Button>
+            <Button onClick={handleSignIn}>Sign in</Button>
+        </>
     )
 }
