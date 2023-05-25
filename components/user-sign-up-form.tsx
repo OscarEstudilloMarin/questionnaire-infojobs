@@ -15,11 +15,9 @@ import { buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 
-interface UserSignUpFormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
 type FormData = z.infer<typeof userAuthSchema>
 
-export function UserSignUpForm({ className, ...props }: UserSignUpFormProps) {
+export function UserSignUpForm({ from }: { from: string }) {
     const router = useRouter()
     const { toast } = useToast()
     const supabase = createClientComponentClient()
@@ -43,7 +41,7 @@ export function UserSignUpForm({ className, ...props }: UserSignUpFormProps) {
                 options: {
                     data: {
                         first_name: data.name,
-                        type: 'candidate',
+                        type: from,
                     },
                     emailRedirectTo: `${location.origin}/auth/callback`,
                 },
@@ -71,7 +69,7 @@ export function UserSignUpForm({ className, ...props }: UserSignUpFormProps) {
     }
 
     return (
-        <div className={cn('grid gap-6', className)} {...props}>
+        <div className="grid gap-6">
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid gap-3">
                     <div className="grid gap-2">
