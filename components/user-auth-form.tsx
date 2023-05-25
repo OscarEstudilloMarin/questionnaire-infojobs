@@ -7,13 +7,14 @@ import { useState } from 'react'
 import type { Session } from '@supabase/auth-helpers-nextjs'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
-import { toast } from '@/hooks/use-toast'
+import { useToast } from '@/hooks/use-toast'
 
 export default function LoginForm({ session }: { session: Session | null }) {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
     const supabase = createClientComponentClient()
+    const { toast } = useToast()
 
     const handleSignUp = async () => {
         try {
@@ -66,7 +67,10 @@ export default function LoginForm({ session }: { session: Session | null }) {
     // for the `session` to be available on first SSR render, it must be
     // fetched in a Server Component and passed down as a prop
     return session ? (
-        <Button onClick={handleSignOut}>Sign out</Button>
+        <div>
+            <Button onClick={() => toast({ title: 'test' })}>Toast</Button>
+            <Button onClick={handleSignOut}>Sign out</Button>
+        </div>
     ) : (
         <>
             <Input

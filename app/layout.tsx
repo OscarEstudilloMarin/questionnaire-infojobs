@@ -1,5 +1,6 @@
 import { Inter } from 'next/font/google'
-import Header from '@/components/Header'
+import Header from '@/components/header'
+import { Toaster } from '@/components/ui/toaster'
 import TailwindIndicator from '@/components/tailwind-indicator'
 
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -31,6 +32,7 @@ export default async function RootLayout({
             <body className={inter.className}>
                 <Header session={session} />
                 {children}
+                <Toaster />
                 <TailwindIndicator />
             </body>
         </html>
