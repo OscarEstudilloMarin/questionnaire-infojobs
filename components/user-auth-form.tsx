@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import useUserStore from '@/hooks/use-user-store'
 
 import { cn } from '@/lib/utils'
 import { userAuthSchema } from '@/lib/validations/auth'
@@ -35,8 +36,6 @@ export default function LoginForm() {
         resolver: zodResolver(userAuthSchema),
     })
 
-    console.log('errors', errors)
-
     async function onSubmit(data: FormData) {
         setIsLoading(true)
 
@@ -48,6 +47,7 @@ export default function LoginForm() {
                 })
 
             console.log('USER', user)
+            useUserStore.setState({ user: user.user })
 
             if (error) {
                 toast({
@@ -75,8 +75,8 @@ export default function LoginForm() {
     return (
         <div className="grid gap-6">
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="grid gap-2">
-                    <div className="grid gap-1">
+                <div className="grid gap-3">
+                    <div className="grid gap-2">
                         <Label htmlFor="email">Email</Label>
                         <Input
                             id="email"
@@ -93,7 +93,7 @@ export default function LoginForm() {
                                 {errors.email.message}
                             </p>
                         )}
-                        <Label htmlFor="email">Email</Label>
+                        <Label htmlFor="password">Password</Label>
                         <Input
                             id="password"
                             type="password"

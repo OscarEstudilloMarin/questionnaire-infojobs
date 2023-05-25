@@ -27,10 +27,14 @@ export default async function RootLayout({
         data: { session },
     } = await supabase.auth.getSession()
 
+    const {
+        data: { user },
+    } = await supabase.auth.getUser()
+
     return (
         <html lang="en">
             <body className={inter.className}>
-                <Header session={session} />
+                <Header session={session} user={user} />
                 {children}
                 <Toaster />
                 <TailwindIndicator />

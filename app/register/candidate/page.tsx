@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import { cn } from '@/lib/utils'
 import { Icons } from '@/components/icons'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 import { UserSignUpForm } from '@/components/user-sign-up-form'
 
 export const metadata = {
@@ -10,7 +10,7 @@ export const metadata = {
     description: 'Improve your candidate selection process with us',
 }
 
-export default function LoginPage() {
+export default function CandidateRegisterPage() {
     return (
         <div className="relative flex h-full w-full flex-col items-center justify-center px-10">
             <Link
@@ -31,10 +31,10 @@ export default function LoginPage() {
                         Registro de candidato
                     </h1>
                     <p className="text-sm text-slate-500 dark:text-slate-400">
-                        Introduce email y contraseña
+                        Introduce tus datos
                     </p>
                 </div>
-                <UserSignUpForm />
+                <UserSignUpForm from="candidate" />
             </div>
         </div>
     )
