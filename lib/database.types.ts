@@ -34,23 +34,78 @@ export interface Database {
   }
   public: {
     Tables: {
-      profile: {
+      application: {
         Row: {
-          first_name: string | null
+          candidate_id: string | null
+          created_at: string | null
+          id: number
+          offer_id: number | null
+        }
+        Insert: {
+          candidate_id?: string | null
+          created_at?: string | null
+          id?: number
+          offer_id?: number | null
+        }
+        Update: {
+          candidate_id?: string | null
+          created_at?: string | null
+          id?: number
+          offer_id?: number | null
+        }
+      }
+      offer: {
+        Row: {
+          category: string | null
+          city: string | null
+          contractType: string | null
+          created_at: string | null
+          creator_id: string | null
+          id: number
+          salary: number | null
+          title: string | null
+          workType: string | null
+        }
+        Insert: {
+          category?: string | null
+          city?: string | null
+          contractType?: string | null
+          created_at?: string | null
+          creator_id?: string | null
+          id?: number
+          salary?: number | null
+          title?: string | null
+          workType?: string | null
+        }
+        Update: {
+          category?: string | null
+          city?: string | null
+          contractType?: string | null
+          created_at?: string | null
+          creator_id?: string | null
+          id?: number
+          salary?: number | null
+          title?: string | null
+          workType?: string | null
+        }
+      }
+      user: {
+        Row: {
+          created_at: string | null
           id: string
-          last_name: string | null
+          name: string | null
           type: string | null
         }
         Insert: {
-          first_name?: string | null
+          created_at?: string | null
           id: string
-          last_name?: string | null
+          name?: string | null
           type?: string | null
         }
         Update: {
-          first_name?: string | null
+          created_at?: string | null
           id?: string
-          last_name?: string | null
+          name?: string | null
           type?: string | null
         }
       }

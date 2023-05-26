@@ -7,10 +7,16 @@ import useSWR from 'swr'
 import * as z from 'zod'
 import { userAuthSchema } from '@/lib/validations/auth'
 
+import { Session } from '@supabase/supabase-js'
+
 type FormData = z.infer<typeof userAuthSchema>
 
-const useUser = () => {
-    const { data: user, mutate: setUser } = useSWR('user', getUser)
+const useUser = (session: Session | null) => {
+    const {
+        data: user,
+        mutate: setUser,
+        isLoading,
+    } = useSWR(session ? 'user' : null, getUser)
 
     const logout = async () => {
         await setUser(logoutService)
@@ -24,7 +30,7 @@ const useUser = () => {
         if (user) await setUser(user)
     }
 
-    return { user, logout, login }
+    return { user, logout, login, isLoading }
 }
 
 export default useUser

@@ -8,19 +8,19 @@ import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 
-import { cn } from '@/lib/utils'
 import { userAuthSchema } from '@/lib/validations/auth'
 import { Icons } from '@/components/icons'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { Database } from '@/lib/database.types'
 
 type FormData = z.infer<typeof userAuthSchema>
 
 export function UserSignUpForm({ from }: { from: string }) {
     const router = useRouter()
     const { toast } = useToast()
-    const supabase = createClientComponentClient()
+    const supabase = createClientComponentClient<Database>()
 
     const {
         register,
@@ -35,17 +35,21 @@ export function UserSignUpForm({ from }: { from: string }) {
     async function onSubmit(data: FormData) {
         setIsLoading(true)
         try {
-            await supabase.auth.signUp({
+            const { data: authData } = await supabase.auth.signUp({
                 email: data.email,
                 password: data.password,
                 options: {
-                    data: {
-                        first_name: data.name,
-                        type: from,
-                    },
                     emailRedirectTo: `${location.origin}/auth/callback`,
                 },
             })
+
+            if (authData && authData.user) {
+                await supabase
+                    .from('user')
+                    .insert([
+                        { id: authData.user.id, name: data.name, type: from },
+                    ])
+            }
 
             toast({
                 title: 'Registro exitoso',
