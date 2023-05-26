@@ -8,11 +8,11 @@ export default function Home() {
 
     return (
         <main
-            className="flex w-full flex-col overflow-y-auto p-10 sm:grid"
-            style={{
-                gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
-                gridGap: '1rem',
-            }}
+            className="flex w-full flex-col gap-4 overflow-y-auto p-10 sm:grid sm:grid-cols-2"
+            // style={{
+            //     gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
+            //     gridGap: '1rem',
+            // }}
         >
             {offers
                 ? offers.map((offer) => (

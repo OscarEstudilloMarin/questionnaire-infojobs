@@ -16,7 +16,7 @@ export async function GET() {
     // const data = (await res.json()) as OffersResponse
 
     // return NextResponse.json(data.offers)
-    const { data, error } = await supabase.from('offer').select('*')
+    const { data, error } = await supabase.from('offer').select(`*, user (*)`)
 
     return NextResponse.json(data)
 }
