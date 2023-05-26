@@ -53,9 +53,11 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
                 />
             </div>
             <div className="flex h-full w-3/4 flex-col items-start justify-between py-2">
-                <div>
+                <div className="space-y-1">
                     <CardTitle>{offer.title}</CardTitle>
-                    <CardDescription>{offer.user.name}</CardDescription>
+                    <CardDescription className="uppercase text-primary">
+                        {offer.user.name}
+                    </CardDescription>
                 </div>
 
                 <div className="flex flex-col space-y-2">
@@ -73,7 +75,7 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
                         )}
                         <Separator orientation="vertical" />
                         {offer.created_at && (
-                            <span className="text-xs text-gray-400">
+                            <span className="text-xs text-[#00a550]">
                                 {dayjs(offer.created_at).fromNow()}
                             </span>
                         )}
