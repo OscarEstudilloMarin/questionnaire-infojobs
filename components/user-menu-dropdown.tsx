@@ -15,6 +15,7 @@ import {
 import useUser from '@/hooks/use-user'
 
 import { Session } from '@supabase/supabase-js'
+import { Skeleton } from './ui/skeleton'
 
 export default function UserMenuDropdown({
     session,
@@ -24,7 +25,7 @@ export default function UserMenuDropdown({
     const router = useRouter()
     const [open, setOpen] = useState(false)
 
-    const { logout, user } = useUser(session)
+    const { logout, user, isLoading } = useUser(session)
 
     const handleLogOut = async () => {
         await logout()
@@ -47,9 +48,16 @@ export default function UserMenuDropdown({
                             src={`https://avatar.vercel.sh/${user?.id}.png`}
                             alt="user-avatar"
                         />
-                        <AvatarFallback>SC</AvatarFallback>
+                        <AvatarFallback>
+                            <Skeleton className="rounded-full" />
+                        </AvatarFallback>
                     </Avatar>
-                    <p className="truncate">{user?.name}</p>
+                    {isLoading ? (
+                        <Skeleton className="h-5 w-20 rounded-md" />
+                    ) : (
+                        <p className="truncate">{user?.name}</p>
+                    )}
+
                     <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </DropdownMenuTrigger>

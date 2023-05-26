@@ -12,10 +12,11 @@ import { Session } from '@supabase/supabase-js'
 type FormData = z.infer<typeof userAuthSchema>
 
 const useUser = (session: Session | null) => {
-    const { data: user, mutate: setUser } = useSWR(
-        session ? 'user' : null,
-        getUser
-    )
+    const {
+        data: user,
+        mutate: setUser,
+        isLoading,
+    } = useSWR(session ? 'user' : null, getUser)
 
     const logout = async () => {
         await setUser(logoutService)
@@ -29,7 +30,7 @@ const useUser = (session: Session | null) => {
         if (user) await setUser(user)
     }
 
-    return { user, logout, login }
+    return { user, logout, login, isLoading }
 }
 
 export default useUser

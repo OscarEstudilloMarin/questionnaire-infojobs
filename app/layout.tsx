@@ -30,13 +30,11 @@ export default async function RootLayout({
         data: { session },
     } = await supabase.auth.getSession()
 
-    console.log('SESSION IN LAYOUT', session)
-
     return (
         <html lang="es">
             <head />
             <body className={`${inter.className} flex h-screen flex-col`}>
-                <Header session={session} />
+                <Header session={session ?? null} />
                 <div className="flex flex-1">{children}</div>
                 <Toaster />
                 <TailwindIndicator />
