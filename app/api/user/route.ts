@@ -7,7 +7,12 @@ export async function GET() {
 
     const {
         data: { user },
+        error,
     } = await supabase.auth.getUser()
+
+    // if (error) {
+    //     return NextResponse.json(error, { status: 401 })
+    // }
 
     return NextResponse.json(user)
 }

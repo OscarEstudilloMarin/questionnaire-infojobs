@@ -21,7 +21,7 @@ export default async function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
+        <html lang="es">
             <head />
             <body className={`${inter.className} flex h-screen flex-col`}>
                 <Header />

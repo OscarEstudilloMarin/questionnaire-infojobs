@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { Button } from './ui/button'
 import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
-
 import UserMenuDropdown from './user-menu-dropdown'
 import useUser from '@/hooks/use-user'
 
