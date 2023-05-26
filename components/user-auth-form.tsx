@@ -6,13 +6,13 @@ import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 
-import { cn } from '@/lib/utils'
 import { userAuthSchema } from '@/lib/validations/auth'
 import { Icons } from '@/components/icons'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import useUser from '@/hooks/use-user'
+import { toast } from '@/hooks/use-toast'
 
 type FormData = z.infer<typeof userAuthSchema>
 
@@ -37,8 +37,12 @@ export default function LoginForm() {
             await login(data)
             reset()
             router.push('/')
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            toast({
+                title: 'Error',
+                description: error,
+                variant: 'destructive',
+            })
         } finally {
             setIsLoading(false)
         }
