@@ -10,6 +10,9 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata = {
     title: 'InfoJobs questionnaire',
     description: 'Improve your candidate selection process with us',
+    icons: {
+        icon: '/favicon.ico',
+    },
 }
 
 export default async function RootLayout({
@@ -19,6 +22,7 @@ export default async function RootLayout({
 }) {
     return (
         <html lang="en">
+            <head />
             <body className={`${inter.className} flex h-screen flex-col`}>
                 <Header />
                 <div className="flex flex-1">{children}</div>
