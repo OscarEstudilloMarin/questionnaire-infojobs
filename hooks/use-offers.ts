@@ -1,9 +1,9 @@
 import useSWR from 'swr'
-import { Offer } from '@/lib/collection'
+import { SupabaseOffer } from '@/lib/collection'
 import { getOffers } from '@/service/offers-service'
 
 const useOffers = () => {
-    const { data: offers } = useSWR<Offer[]>('offers', getOffers)
+    const { data: offers } = useSWR<SupabaseOffer[]>('offers', getOffers)
     return { offers }
 }
 

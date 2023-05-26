@@ -18,7 +18,7 @@ type FormData = z.infer<typeof userAuthSchema>
 
 export default function LoginForm() {
     const router = useRouter()
-    const { login } = useUser()
+    const { login } = useUser(null)
 
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
@@ -37,6 +37,7 @@ export default function LoginForm() {
             await login(data)
             reset()
             router.push('/')
+            router.refresh()
         } catch (error: any) {
             toast({
                 title: 'Error',

@@ -1,4 +1,5 @@
-import { User } from '@supabase/supabase-js'
+// import { User } from '@supabase/supabase-js'
+import { User } from '@/lib/collection'
 import * as z from 'zod'
 import { userAuthSchema } from '@/lib/validations/auth'
 
