@@ -6,7 +6,7 @@ import { userAuthSchema } from '@/lib/validations/auth'
 type FormData = z.infer<typeof userAuthSchema>
 
 export const getUser = async (): Promise<User> => {
-    return await fetch('api/user').then((res) => res.json())
+    return await fetch('/api/user').then((res) => res.json())
 }
 
 export const logout = async (): Promise<User> => {

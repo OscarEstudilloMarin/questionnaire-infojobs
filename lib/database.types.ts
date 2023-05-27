@@ -56,33 +56,39 @@ export interface Database {
       }
       offer: {
         Row: {
+          bannerImage: string | null
           category: string | null
           city: string | null
           contractType: string | null
           created_at: string | null
           creator_id: string | null
+          description: string | null
           id: number
           salary: number | null
           title: string | null
           workType: string | null
         }
         Insert: {
+          bannerImage?: string | null
           category?: string | null
           city?: string | null
           contractType?: string | null
           created_at?: string | null
           creator_id?: string | null
+          description?: string | null
           id?: number
           salary?: number | null
           title?: string | null
           workType?: string | null
         }
         Update: {
+          bannerImage?: string | null
           category?: string | null
           city?: string | null
           contractType?: string | null
           created_at?: string | null
           creator_id?: string | null
+          description?: string | null
           id?: number
           salary?: number | null
           title?: string | null

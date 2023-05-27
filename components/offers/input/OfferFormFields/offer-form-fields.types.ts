@@ -6,6 +6,7 @@ export enum OfferFormFields {
     SALARY = 'salary',
     WORK_TYPE = 'workType',
     BANNER_IMAGE = 'bannerImage',
+    DESCRIPTION = 'description',
 }
 
 export type OfferFormState = {
@@ -16,14 +17,16 @@ export type OfferFormState = {
     [OfferFormFields.SALARY]: string
     [OfferFormFields.WORK_TYPE]: string
     [OfferFormFields.BANNER_IMAGE]: string
+    [OfferFormFields.DESCRIPTION]: string
 }
 
 export const initialOfferFormState: OfferFormState = {
     title: '',
-    city: '',
+    description: '',
     category: '',
-    contractType: '',
+    bannerImage: '',
+    city: '',
     salary: '',
     workType: '',
-    bannerImage: '',
+    contractType: '',
 }

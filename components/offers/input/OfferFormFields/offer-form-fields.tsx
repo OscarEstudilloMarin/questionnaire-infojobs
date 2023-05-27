@@ -15,23 +15,20 @@ const OfferFormFields = (): JSX.Element => {
 
     return (
         <div className="flex flex-col gap-6">
-            {Object.entries(state).map(
-                (item, index) =>
-                    typeof item[1] !== 'boolean' && (
-                        <LabeledInput
-                            key={index}
-                            label={item[0]}
-                            value={item[1]}
-                            onChange={(e) =>
-                                setState((prev) => ({
-                                    ...prev,
-                                    [item[0]]: e.target.value,
-                                }))
-                            }
-                            parse
-                        />
-                    )
-            )}
+            {Object.entries(state).map((item, index) => (
+                <LabeledInput
+                    key={index}
+                    label={item[0]}
+                    value={item[1]}
+                    onChange={(e) =>
+                        setState((prev) => ({
+                            ...prev,
+                            [item[0]]: e.target.value,
+                        }))
+                    }
+                    parse
+                />
+            ))}
         </div>
     )
 }

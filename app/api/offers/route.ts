@@ -15,34 +15,33 @@ export async function GET() {
     // const data = (await res.json()) as OffersResponse
 
     // return NextResponse.json(data.offers)
-    const { data, error } = await supabase.from('offer').select(`*, user (*)`)
+    const { data } = await supabase.from('offer').select(`*, user (*)`)
 
     return NextResponse.json(data)
 }
 
-export async function POST(req: any) {
+export async function POST(req: Request) {
     const supabase = createRouteHandlerClient<Database>({ cookies })
 
-    const { userId, offer } = req.body
+    const { data: userData } = await supabase.auth.getUser()
+
+    const body = await req.json()
+
+    console.log('body', body)
+
+    const offer = body.offer
 
     const { data } = await supabase.from('offer').insert([
         {
             title: offer.title,
-            province: offer.province,
-            city: offer.city,
-            link: offer.link,
+            description: offer.description,
             category: offer.category,
+            city: offer.city,
             contractType: offer.contractType,
-            subcategory: offer.subcategory,
-            salaryMin: offer.salaryMin,
-            salaryMax: offer.salaryMax,
-            salaryPeriod: offer.salaryPeriod,
-            experienceMin: offer.experienceMin,
-            workDay: offer.workDay,
-            study: offer.study,
-            teleworking: offer.teleworking,
-            published: offer.published,
-            updated: offer.updated,
+            workType: offer.workType,
+            salary: offer.salary,
+            bannerImage: offer.bannerImage,
+            creator_id: userData.user?.id,
         },
     ])
 
