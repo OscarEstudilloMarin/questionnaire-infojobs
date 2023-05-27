@@ -15,7 +15,7 @@ export default function Header() {
     const { user } = useUser()
 
     return (
-        <header className="flex h-20 w-full items-center justify-between p-5">
+        <header className="flex h-20 w-full items-center justify-between border-b-[1px] border-solid border-[#e6e6e6] bg-white p-5">
             <Image
                 src="/icons/ij-logo-default_primary.svg"
                 alt="infojobs-icon"

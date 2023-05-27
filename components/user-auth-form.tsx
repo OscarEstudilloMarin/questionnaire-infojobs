@@ -9,7 +9,7 @@ import { useForm } from 'react-hook-form'
 import { cn } from '@/lib/utils'
 import { userAuthSchema } from '@/lib/validations/auth'
 import { Icons } from '@/components/icons'
-import { buttonVariants } from '@/components/ui/button'
+import { Button, buttonVariants } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import useUser from '@/hooks/use-user'
@@ -80,15 +80,12 @@ export default function LoginForm() {
                             </p>
                         )}
                     </div>
-                    <button
-                        className={cn(buttonVariants())}
-                        disabled={isLoading}
-                    >
+                    <Button variant="secondary" disabled={isLoading}>
                         {isLoading && (
                             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                         )}
                         Accede
-                    </button>
+                    </Button>
                 </div>
             </form>
         </div>

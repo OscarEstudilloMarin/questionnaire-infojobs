@@ -1,4 +1,5 @@
 import { PrimitiveDivProps } from '@radix-ui/react-toast'
+import { ReactNode } from 'react'
 
 interface BasePageProps extends Omit<PrimitiveDivProps, 'className'> {}
 

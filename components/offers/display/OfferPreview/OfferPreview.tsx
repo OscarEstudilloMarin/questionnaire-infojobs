@@ -12,13 +12,13 @@ const OfferPreview = (): JSX.Element => {
     } = useContext(OfferFormContext) as OfferFormContextType
 
     return (
-        <div className="flex flex-col bg-red-400">
+        <div className="radius-lg flex flex-col bg-white">
             <div className="my-8 flex flex-row items-center justify-center gap-4">
                 {image && (
                     <div className="flex flex-col">
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                            className="radius-sm aspect-square w-16"
+                            className="radius-sm aspect-square w-12"
                             src={image}
                             alt=""
                         />

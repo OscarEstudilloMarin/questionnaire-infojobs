@@ -8,18 +8,19 @@ export default function Home() {
 
     return (
         <main
-            className="overflow-y-auto p-10"
+            className="flex w-full flex-col overflow-y-auto p-10 sm:grid"
             style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(500px, 1fr))',
                 gridGap: '1rem',
             }}
         >
-            {offers && offers.length > 0
+            {offers
                 ? offers.map((offer) => (
                       <OfferCard key={offer.id} offer={offer} />
                   ))
-                : null}
+                : Array.from({ length: 20 }).map((_, i) => (
+                      <OfferCard key={i} skeleton />
+                  ))}
         </main>
     )
 }
