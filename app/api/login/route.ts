@@ -1,20 +1,23 @@
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export async function POST(req: NextRequest) {
+export async function POST(request: Request, response: Response) {
     const supabase = createRouteHandlerClient({ cookies })
 
-    console.log(req.body)
-    //
-    // const { email, password } = await req.body
+    const { email, password } = await request.json()
 
-    // console.log(email, password)
+    const { data: user, error } = await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
+    })
 
-    // const { data: user, error } = await supabase.auth.signInWithPassword({
-    //     email: email,
-    //     password: password,
-    // })
+    if (error) {
+        return NextResponse.json(
+            { error: 'Credenciales incorrectas' },
+            { status: 401 }
+        )
+    }
 
-    // return NextResponse.json({ user: user.user, error })
+    return NextResponse.json({ user: user.user })
 }

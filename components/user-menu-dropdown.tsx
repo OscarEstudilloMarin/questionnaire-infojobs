@@ -1,12 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import {
-    User,
-    createClientComponentClient,
-} from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
-
 import { ChevronsUpDown, LogOut } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -19,10 +14,23 @@ import {
 } from '@/components/ui/dropdown-menu'
 import useUser from '@/hooks/use-user'
 
-export default function UserMenuDropdown() {
+import { Session } from '@supabase/supabase-js'
+import { Skeleton } from './ui/skeleton'
+
+export default function UserMenuDropdown({
+    session,
+}: {
+    session: Session | null
+}) {
+    const router = useRouter()
     const [open, setOpen] = useState(false)
 
-    const { logout, user } = useUser()
+    const { logout, user, isLoading } = useUser(session)
+
+    const handleLogOut = async () => {
+        await logout()
+        router.refresh()
+    }
 
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -40,22 +48,27 @@ export default function UserMenuDropdown() {
                             src={`https://avatar.vercel.sh/${user?.id}.png`}
                             alt="user-avatar"
                         />
-                        <AvatarFallback>SC</AvatarFallback>
+                        <AvatarFallback>
+                            <Skeleton className="rounded-full" />
+                        </AvatarFallback>
                     </Avatar>
-                    <p className="truncate">
-                        {user?.user_metadata?.first_name}
-                    </p>
+                    {isLoading ? (
+                        <Skeleton className="h-5 w-20 rounded-md" />
+                    ) : (
+                        <p className="truncate">{user?.name}</p>
+                    )}
+
                     <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-[180px] p-2">
                 <DropdownMenuGroup>
                     <DropdownMenuItem
-                        onSelect={logout}
+                        onSelect={handleLogOut}
                         className="cursor-pointer"
                     >
                         <LogOut className="mr-2 h-4 w-4" />
-                        Sign out
+                        Cerrar sesión
                     </DropdownMenuItem>
                 </DropdownMenuGroup>
             </DropdownMenuContent>
