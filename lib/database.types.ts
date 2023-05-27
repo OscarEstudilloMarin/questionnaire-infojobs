@@ -61,6 +61,7 @@ export interface Database {
           contractType: string | null
           created_at: string | null
           creator_id: string | null
+          description: string | null
           id: number
           salary: number | null
           title: string | null
@@ -72,6 +73,7 @@ export interface Database {
           contractType?: string | null
           created_at?: string | null
           creator_id?: string | null
+          description?: string | null
           id?: number
           salary?: number | null
           title?: string | null
@@ -83,6 +85,7 @@ export interface Database {
           contractType?: string | null
           created_at?: string | null
           creator_id?: string | null
+          description?: string | null
           id?: number
           salary?: number | null
           title?: string | null
