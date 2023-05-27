@@ -1,7 +1,7 @@
 'use client'
 
 import LabeledInput from '@/components/common/input/LabeledInput/LabeledInput'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 
 import {
     OfferFormContext,

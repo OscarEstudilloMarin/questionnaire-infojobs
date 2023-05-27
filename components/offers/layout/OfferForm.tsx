@@ -5,7 +5,7 @@ import { initialOfferFormState } from '../input/OfferFormFields/offer-form-field
 import { Button } from '@/components/ui/button'
 import OfferFormFields from '@/components/offers/input/OfferFormFields/offer-form-fields'
 import OfferPreview from '@/components/offers/display/OfferPreview/OfferPreview'
-import { useState, createContext } from 'react'
+import { useState } from 'react'
 import { OfferFormState } from '@/components/offers/input/OfferFormFields/offer-form-fields.types'
 
 const OfferForm = (): JSX.Element => {
@@ -32,7 +32,7 @@ const OfferForm = (): JSX.Element => {
                         <div className="flex flex-1 flex-col">
                             <OfferFormFields />
                         </div>
-                        <div className="flex flex-1 flex-col rounded-lg border">
+                        <div className="flex flex-1 flex-col justify-center rounded-lg">
                             <OfferPreview />
                         </div>
                     </section>
