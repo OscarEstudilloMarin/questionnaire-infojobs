@@ -1,4 +1,5 @@
-import { User } from '@supabase/supabase-js'
+// import { User } from '@supabase/supabase-js'
+import { User } from '@/lib/collection'
 import * as z from 'zod'
 import { userAuthSchema } from '@/lib/validations/auth'
 
@@ -17,7 +18,7 @@ export const logout = async (): Promise<User> => {
 export const login = async ({
     email,
     password,
-}: FormData): Promise<{ user: User; error: Error }> => {
+}: FormData): Promise<{ user: User; error: any }> => {
     return await fetch('api/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),

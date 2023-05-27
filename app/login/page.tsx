@@ -1,12 +1,9 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import type { Database } from '@/lib/database.types'
 import { cn } from '@/lib/utils'
 
 import { Icons } from '@/components/icons'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { buttonVariants } from '@/components/ui/button'
 
 import LoginForm from '@/components/user-auth-form'
 import SignUpRedirect from '@/components/sign-up-redirect'
@@ -28,7 +25,7 @@ export default async function LoginPage() {
             >
                 <>
                     <Icons.chevronLeft className="mr-2 h-4 w-4" />
-                    Back
+                    Volver
                 </>
             </Link>
             <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
