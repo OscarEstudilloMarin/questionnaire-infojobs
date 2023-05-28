@@ -1,4 +1,3 @@
-import { OffersResponse } from '@/lib/collection'
 import { NextResponse } from 'next/server'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
@@ -16,7 +15,35 @@ export async function GET() {
     // const data = (await res.json()) as OffersResponse
 
     // return NextResponse.json(data.offers)
-    const { data, error } = await supabase.from('offer').select(`*, user (*)`)
+    const { data } = await supabase.from('offer').select(`*, user (*)`)
+
+    return NextResponse.json(data)
+}
+
+export async function POST(req: Request) {
+    const supabase = createRouteHandlerClient<Database>({ cookies })
+
+    const { data: userData } = await supabase.auth.getUser()
+
+    const body = await req.json()
+
+    console.log('body', body)
+
+    const offer = body.offer
+
+    const { data } = await supabase.from('offer').insert([
+        {
+            title: offer.title,
+            description: offer.description,
+            category: offer.category,
+            city: offer.city,
+            contractType: offer.contractType,
+            workType: offer.workType,
+            salary: offer.salary,
+            bannerImage: offer.bannerImage,
+            creator_id: userData.user?.id,
+        },
+    ])
 
     return NextResponse.json(data)
 }

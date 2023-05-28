@@ -8,6 +8,8 @@ import { cookies } from 'next/headers'
 import type { Database } from '@/lib/database.types'
 
 import '../styles/globals.css'
+import BasePage from '@/components/common/layout/base-page/base-page'
+import MainLayout from '@/components/common/layout/main-layout/main-layout'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -34,10 +36,12 @@ export default async function RootLayout({
         <html lang="es">
             <head />
             <body className={`${inter.className} flex h-screen flex-col`}>
-                <Header session={session ?? null} />
-                <div className="flex flex-1">{children}</div>
-                <Toaster />
-                <TailwindIndicator />
+                <MainLayout>
+                    <Header session={session ?? null} />
+                    <BasePage>{children}</BasePage>
+                    <Toaster />
+                    <TailwindIndicator />
+                </MainLayout>
             </body>
         </html>
     )

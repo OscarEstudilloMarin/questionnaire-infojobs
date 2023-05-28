@@ -56,6 +56,7 @@ export interface Database {
       }
       offer: {
         Row: {
+          bannerImage: string | null
           category: string | null
           city: string | null
           contractType: string | null
@@ -68,6 +69,7 @@ export interface Database {
           workType: string | null
         }
         Insert: {
+          bannerImage?: string | null
           category?: string | null
           city?: string | null
           contractType?: string | null
@@ -80,6 +82,7 @@ export interface Database {
           workType?: string | null
         }
         Update: {
+          bannerImage?: string | null
           category?: string | null
           city?: string | null
           contractType?: string | null
