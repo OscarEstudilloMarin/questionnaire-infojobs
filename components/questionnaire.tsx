@@ -21,8 +21,6 @@ export default function Questionnaire() {
     const [loading, setLoading] = useState(false)
     const [questions, setQuestions] = useState<string[]>([])
 
-    console.log('NUMBER', number)
-
     const handleSubmit = async (e: any) => {
         try {
             e.preventDefault()

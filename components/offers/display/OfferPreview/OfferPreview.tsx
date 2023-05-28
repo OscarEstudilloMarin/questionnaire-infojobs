@@ -13,8 +13,8 @@ const OfferPreview = (): JSX.Element => {
     } = useContext(OfferFormContext) as OfferFormContextType
 
     return (
-        <div className="radius-lg flex flex-col bg-white pb-8">
-            <div className="flex h-40 w-full bg-slate-300">
+        <div className="flex flex-col rounded-lg bg-white pb-8">
+            <div className="flex h-40 w-full rounded-t-lg bg-slate-300">
                 {bannerImage && (
                     <Image
                         alt="banner-image"
@@ -27,7 +27,7 @@ const OfferPreview = (): JSX.Element => {
                 <div className="flex flex-col">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                        className="radius-lg aspect-square w-16"
+                        className="aspect-square w-16 rounded-lg"
                         src={
                             'https://components.infojobs.com/statics/images/pic-company-logo.png'
                         }

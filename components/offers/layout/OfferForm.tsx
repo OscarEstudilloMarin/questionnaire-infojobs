@@ -11,6 +11,7 @@ import { createOffer } from '@/service/offers-service'
 import { useRouter } from 'next/navigation'
 import { Icons } from '@/components/icons'
 import { useToast } from '@/hooks/use-toast'
+import Questionnaire from '@/components/questionnaire'
 
 const OfferForm = (): JSX.Element => {
     const [formState, setFormState] = useState<OfferFormState>(
@@ -57,11 +58,11 @@ const OfferForm = (): JSX.Element => {
                             </Button>
                         </div>
                     </section>
-                    <section className="flex flex-row gap-12">
-                        <div className="flex flex-1 flex-col">
+                    <section className="flex justify-between gap-12">
+                        <div className="flex w-1/2 flex-col">
                             <OfferFormFields />
                         </div>
-                        <div className="flex flex-1 flex-col justify-center rounded-lg">
+                        <div className="flex w-1/2 flex-col pt-8">
                             <OfferPreview />
                         </div>
                     </section>

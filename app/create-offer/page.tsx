@@ -3,6 +3,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { Database } from '@/lib/database.types'
 import { redirect } from 'next/navigation'
+import Questionnaire from '@/components/questionnaire'
 
 export default async function CreateOfferPage(): Promise<JSX.Element> {
     const supabase = createServerComponentClient<Database>({ cookies })
@@ -20,8 +21,9 @@ export default async function CreateOfferPage(): Promise<JSX.Element> {
     }
 
     return (
-        <div className="px-5">
+        <div className="flex flex-col space-y-5 px-5">
             <OfferForm />
+            <Questionnaire />
         </div>
     )
 }
