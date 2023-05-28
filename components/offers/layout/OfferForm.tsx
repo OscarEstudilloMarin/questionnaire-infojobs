@@ -45,16 +45,15 @@ const OfferForm = (): JSX.Element => {
             <form onSubmit={publishOffer}>
                 <div className="flex flex-1 flex-col">
                     <section className="flex flex-row items-center justify-between py-12">
-                        <h2 className="font flex flex-1 text-2xl font-bold">
-                            Create offer page
-                        </h2>
+                        <p className="font flex flex-1 text-2xl font-bold">
+                            Crear oferta
+                        </p>
                         <div className="gap flex flex-row items-center gap-x-4">
-                            <Button variant="secondary">Cancel</Button>
                             <Button variant="default" type="submit">
                                 {loading && (
                                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                                 )}
-                                Publish
+                                Publicar
                             </Button>
                         </div>
                     </section>

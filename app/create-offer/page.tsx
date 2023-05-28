@@ -19,5 +19,9 @@ export default async function CreateOfferPage(): Promise<JSX.Element> {
         redirect('/')
     }
 
-    return <OfferForm />
+    return (
+        <div className="px-5">
+            <OfferForm />
+        </div>
+    )
 }

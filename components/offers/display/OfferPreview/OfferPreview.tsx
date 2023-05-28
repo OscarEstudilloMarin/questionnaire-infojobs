@@ -5,6 +5,7 @@ import {
     OfferFormContextType,
 } from '../../contexts/offer-form'
 import { Separator } from '@radix-ui/react-separator'
+import Image from 'next/image'
 
 const OfferPreview = (): JSX.Element => {
     const {
@@ -15,7 +16,11 @@ const OfferPreview = (): JSX.Element => {
         <div className="radius-lg flex flex-col bg-white pb-8">
             <div className="flex h-40 w-full bg-slate-300">
                 {bannerImage && (
-                    <img className="object-cover" src={bannerImage} />
+                    <Image
+                        alt="banner-image"
+                        className="object-cover"
+                        src={bannerImage}
+                    />
                 )}
             </div>
             <div className="my-8 flex flex-row items-center justify-center gap-4">
