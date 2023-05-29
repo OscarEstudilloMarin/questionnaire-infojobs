@@ -36,6 +36,7 @@ export interface Database {
     Tables: {
       application: {
         Row: {
+          answers: string[] | null
           candidate_id: string | null
           created_at: string | null
           form_mark: number | null
@@ -43,6 +44,7 @@ export interface Database {
           offer_id: number | null
         }
         Insert: {
+          answers?: string[] | null
           candidate_id?: string | null
           created_at?: string | null
           form_mark?: number | null
@@ -50,6 +52,7 @@ export interface Database {
           offer_id?: number | null
         }
         Update: {
+          answers?: string[] | null
           candidate_id?: string | null
           created_at?: string | null
           form_mark?: number | null
@@ -59,46 +62,46 @@ export interface Database {
       }
       offer: {
         Row: {
-          bannerImage: string | null
+          banner_image: string | null
           category: string | null
           city: string | null
-          contractType: string | null
+          contract_type: string | null
           created_at: string | null
           creator_id: string | null
           description: string | null
-          form: Json | null
           id: number
+          questions: string[]
           salary: number | null
           title: string | null
-          workType: string | null
+          work_type: string | null
         }
         Insert: {
-          bannerImage?: string | null
+          banner_image?: string | null
           category?: string | null
           city?: string | null
-          contractType?: string | null
+          contract_type?: string | null
           created_at?: string | null
           creator_id?: string | null
           description?: string | null
-          form?: Json | null
           id?: number
+          questions: string[]
           salary?: number | null
           title?: string | null
-          workType?: string | null
+          work_type?: string | null
         }
         Update: {
-          bannerImage?: string | null
+          banner_image?: string | null
           category?: string | null
           city?: string | null
-          contractType?: string | null
+          contract_type?: string | null
           created_at?: string | null
           creator_id?: string | null
           description?: string | null
-          form?: Json | null
           id?: number
+          questions?: string[]
           salary?: number | null
           title?: string | null
-          workType?: string | null
+          work_type?: string | null
         }
       }
       user: {

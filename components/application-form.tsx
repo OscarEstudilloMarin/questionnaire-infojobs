@@ -26,19 +26,19 @@ const FormSchema = z.object({
 const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     const [loading, setLoading] = useState(false)
 
-    const offerForm: { questions: string[] } = offer.form as any
+    const { questions } = offer
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            answers: Array(offerForm.questions.length).fill(''),
+            answers: Array(questions?.length).fill(''),
         },
     })
 
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
         setLoading(true)
 
-        await applyOffer(offer.id, offerForm.questions, data.answers)
+        await applyOffer(offer.id, questions, data.answers)
 
         setLoading(false)
         form.reset()
@@ -57,7 +57,7 @@ const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
                 <div className="flex flex-col gap-4">
                     <Label>Cuestionario</Label>
                     <div className="flex flex-col gap-1.5">
-                        {offerForm.questions.map((question, index) => {
+                        {questions.map((question, index) => {
                             return (
                                 <FormField
                                     key={index}

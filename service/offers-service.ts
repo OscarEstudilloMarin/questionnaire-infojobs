@@ -3,7 +3,7 @@ import { SupabaseOfferWithUser } from '@/lib/collection'
 import type { FormValues } from '@/components/create-offer-form'
 
 export const getOffers = async (): Promise<SupabaseOfferWithUser[]> => {
-    return await fetch('api/offers').then((res) => res.json())
+    return await fetch('/api/offers').then((res) => res.json())
 }
 
 interface PublishOfferBody {
@@ -38,6 +38,6 @@ export const applyOffer = async (
 
     return await fetch(`/api/offers/${offerId}`, {
         method: 'POST',
-        body: JSON.stringify(formattedResponse.data),
+        body: JSON.stringify({ mark: formattedResponse.data, answers }),
     }).then((res) => res.json())
 }

@@ -26,14 +26,12 @@ export async function POST(req: Request) {
             description: offer.description,
             category: offer.category,
             city: offer.city,
-            contractType: offer.contractType,
-            workType: offer.workType,
+            contract_type: offer.contract_type,
+            work_type: offer.work_type,
             salary: offer.salary,
-            bannerImage: offer.bannerImage,
+            banner_image: offer.banner_image,
             creator_id: userData.user?.id,
-            form: {
-                questions: offer.questions,
-            },
+            questions: offer.questions,
         },
     ])
 

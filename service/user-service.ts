@@ -10,7 +10,7 @@ export const getUser = async (): Promise<User> => {
 }
 
 export const logout = async (): Promise<User> => {
-    return await fetch('api/logout', {
+    return await fetch('/api/logout', {
         method: 'POST',
     }).then((res) => res.json())
 }
@@ -19,7 +19,7 @@ export const login = async ({
     email,
     password,
 }: FormData): Promise<{ user: User; error: any }> => {
-    return await fetch('api/login', {
+    return await fetch('/api/login', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
     }).then((res) => res.json())

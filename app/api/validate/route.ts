@@ -11,7 +11,7 @@ const openai = new OpenAIApi(configuration)
 const INITIAL_MESSAGES = [
     {
         role: ChatCompletionRequestMessageRoleEnum.System,
-        content: `Quiero que puntues con una nota del 1 al 10 las siguientes respuestas.
+        content: `Quiero que puntues con una nota del 1 al 10 las siguientes respuestas. Cada respuesta tiene que valer lo mismo, y debe puntuarse con 0 si no se contesta o si la respuesta no tiene sentido o no se relaciona con la pregunta.
 
         El formato de tu respuesta tiene que ser la media de las notas de cada respuesta. Si la primera respuesta la puntúas con un 5 y la segunda con un 10, tu respuesta tiene que ser 7.5. El formato de respuesta es únicamente la nota, sin texto adicional.
 

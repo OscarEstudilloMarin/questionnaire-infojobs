@@ -17,15 +17,20 @@ export async function POST(
 
     const body = await request.json()
 
-    const formattedFormMark = Number(body)
+    const formattedFormMark = Number(body.mark.split('.')[0])
 
-    const { data } = await supabase.from('application').insert([
+    const { data, error } = await supabase.from('application').insert([
         {
             offer_id: Number(params.id),
             candidate_id: userData.user?.id,
             form_mark: formattedFormMark,
+            answers: body.answers,
         },
     ])
+
+    if (error) {
+        console.log('ERROR', error)
+    }
 
     return NextResponse.json(data)
 }

@@ -36,11 +36,11 @@ const FormSchema = z.object({
     title: z.string().nonempty(),
     description: z.string().optional(),
     category: z.string().optional(),
-    bannerImage: z.string().optional(),
+    banner_image: z.string().optional(),
     city: z.string().optional(),
     salary: z.string().optional(),
-    workType: z.string().optional(),
-    contractType: z.string().optional(),
+    work_type: z.string().optional(),
+    contract_type: z.string().optional(),
     questions: z.array(z.string().nonempty()),
 })
 
@@ -58,11 +58,11 @@ export default function CreateOfferForm() {
             title: '',
             description: '',
             category: '',
-            bannerImage: '',
+            banner_image: '',
             city: '',
             salary: '',
-            workType: '',
-            contractType: '',
+            work_type: '',
+            contract_type: '',
             questions: [],
         },
     })
@@ -182,7 +182,7 @@ export default function CreateOfferForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="contractType"
+                        name="contract_type"
                         render={({ field }) => (
                             <FormItem>
                                 <div className="grid w-full max-w-md items-center gap-1.5">
@@ -196,7 +196,7 @@ export default function CreateOfferForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="workType"
+                        name="work_type"
                         render={({ field }) => (
                             <FormItem>
                                 <div className="grid w-full max-w-md items-center gap-1.5">
@@ -224,7 +224,7 @@ export default function CreateOfferForm() {
                     />
                     <FormField
                         control={form.control}
-                        name="bannerImage"
+                        name="banner_image"
                         render={({ field }) => (
                             <FormItem>
                                 <div className="grid w-full max-w-md items-center gap-1.5">
