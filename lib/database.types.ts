@@ -36,57 +36,72 @@ export interface Database {
     Tables: {
       application: {
         Row: {
+          answers: string[] | null
           candidate_id: string | null
           created_at: string | null
+          form_mark: number | null
           id: number
           offer_id: number | null
         }
         Insert: {
+          answers?: string[] | null
           candidate_id?: string | null
           created_at?: string | null
+          form_mark?: number | null
           id?: number
           offer_id?: number | null
         }
         Update: {
+          answers?: string[] | null
           candidate_id?: string | null
           created_at?: string | null
+          form_mark?: number | null
           id?: number
           offer_id?: number | null
         }
       }
       offer: {
         Row: {
+          banner_image: string | null
           category: string | null
           city: string | null
-          contractType: string | null
+          contract_type: string | null
           created_at: string | null
           creator_id: string | null
+          description: string | null
           id: number
+          questions: string[]
           salary: number | null
           title: string | null
-          workType: string | null
+          work_type: string | null
         }
         Insert: {
+          banner_image?: string | null
           category?: string | null
           city?: string | null
-          contractType?: string | null
+          contract_type?: string | null
           created_at?: string | null
           creator_id?: string | null
+          description?: string | null
           id?: number
+          questions: string[]
           salary?: number | null
           title?: string | null
-          workType?: string | null
+          work_type?: string | null
         }
         Update: {
+          banner_image?: string | null
           category?: string | null
           city?: string | null
-          contractType?: string | null
+          contract_type?: string | null
           created_at?: string | null
           creator_id?: string | null
+          description?: string | null
           id?: number
+          questions?: string[]
           salary?: number | null
           title?: string | null
-          workType?: string | null
+          work_type?: string | null
         }
       }
       user: {

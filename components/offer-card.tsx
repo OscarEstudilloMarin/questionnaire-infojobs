@@ -68,9 +68,9 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
                             </span>
                         )}
                         <Separator orientation="vertical" />
-                        {offer.workType && (
+                        {offer.work_type && (
                             <span className="text-xs text-gray-400">
-                                {offer.workType}
+                                {offer.work_type}
                             </span>
                         )}
                         <Separator orientation="vertical" />
@@ -82,9 +82,9 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
                     </div>
 
                     <div className="flex h-4 items-center gap-2">
-                        {offer.contractType && (
+                        {offer.contract_type && (
                             <span className="max-w-[125px] truncate whitespace-nowrap text-xs text-gray-400">
-                                {`Contrato ${offer.contractType}`}
+                                {`Contrato ${offer.contract_type}`}
                             </span>
                         )}
                         <Separator orientation="vertical" />

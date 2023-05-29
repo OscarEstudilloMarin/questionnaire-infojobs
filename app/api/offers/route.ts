@@ -1,4 +1,3 @@
-import { OffersResponse } from '@/lib/collection'
 import { NextResponse } from 'next/server'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
@@ -7,16 +6,34 @@ import { Database } from '@/lib/database.types'
 export async function GET() {
     const supabase = createRouteHandlerClient<Database>({ cookies })
 
-    // const res = await fetch('https://api.infojobs.net/api/9/offer', {
-    //     headers: {
-    //         Authorization: `Basic ${process.env.INFOJOBS_TOKEN}`,
-    //     },
-    // })
+    const { data } = await supabase.from('offer').select(`*, user (*)`)
 
-    // const data = (await res.json()) as OffersResponse
+    return NextResponse.json(data)
+}
 
-    // return NextResponse.json(data.offers)
-    const { data, error } = await supabase.from('offer').select(`*, user (*)`)
+export async function POST(req: Request) {
+    const supabase = createRouteHandlerClient<Database>({ cookies })
+
+    const { data: userData } = await supabase.auth.getUser()
+
+    const body = await req.json()
+
+    const offer = body.offer
+
+    const { data } = await supabase.from('offer').insert([
+        {
+            title: offer.title,
+            description: offer.description,
+            category: offer.category,
+            city: offer.city,
+            contract_type: offer.contract_type,
+            work_type: offer.work_type,
+            salary: offer.salary,
+            banner_image: offer.banner_image,
+            creator_id: userData.user?.id,
+            questions: offer.questions,
+        },
+    ])
 
     return NextResponse.json(data)
 }

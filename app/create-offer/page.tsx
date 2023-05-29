@@ -1,11 +1,13 @@
+import OfferForm from '@/components/offers/layout/OfferForm'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { Database } from '@/lib/database.types'
+import { redirect } from 'next/navigation'
+import Questionnaire from '@/components/questionnaire'
 
-import CreateOfferBtn from './create-offer-btn'
-import OffersGrid from '@/components/offers-grid'
+import CreateOfferForm from '@/components/create-offer-form'
 
-export default async function Home() {
+export default async function CreateOfferPage(): Promise<JSX.Element> {
     const supabase = createServerComponentClient<Database>({ cookies })
 
     const { data } = await supabase.auth.getUser()
@@ -16,11 +18,13 @@ export default async function Home() {
         .eq('id', data.user?.id)
         .single()
 
-    return (
-        <main className="flex w-full flex-col gap-4 overflow-y-auto p-10">
-            {user?.type === 'employer' && <CreateOfferBtn />}
+    if (user?.type !== 'employer') {
+        redirect('/')
+    }
 
-            <OffersGrid />
-        </main>
+    return (
+        <div className="flex px-5">
+            <CreateOfferForm />
+        </div>
     )
 }
