@@ -1,23 +1,22 @@
 'use client'
 
 import { Button } from './ui/button'
-import { Input } from './ui/input'
 import { Label } from './ui/label'
 import { Separator } from './ui/separator'
 import { Textarea } from './ui/textarea'
+
+import { toast } from '@/hooks/use-toast'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
 
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-} from '@/components/ui/form'
+import { Form, FormField, FormItem, FormLabel } from '@/components/ui/form'
 import { SupabaseOfferWithUser } from '@/lib/collection'
+import { useState } from 'react'
+import { Icons } from './icons'
+
+import { applyOffer } from '@/service/offers-service'
 
 const FormSchema = z.object({
     cv: z.string().optional(),
@@ -25,18 +24,28 @@ const FormSchema = z.object({
 })
 
 const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
-    // const questions = offer.form?.questions as string[]
+    const [loading, setLoading] = useState(false)
+
+    const offerForm: { questions: string[] } = offer.form as any
 
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
-            cv: '',
-            answers: Array(3).fill(''),
+            answers: Array(offerForm.questions.length).fill(''),
         },
     })
 
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
         console.log(data)
+        setLoading(true)
+
+        await applyOffer(offer.id, offerForm.questions, data.answers)
+
+        setLoading(false)
+        toast({
+            title: 'Inscripción realizada con éxito',
+            variant: 'default',
+        })
     }
 
     return (
@@ -45,25 +54,10 @@ const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
                 onSubmit={form.handleSubmit(onSubmit)}
                 className="flex flex-col gap-4"
             >
-                <FormField
-                    control={form.control}
-                    name="cv"
-                    render={({ field }) => (
-                        <FormItem>
-                            <div className="grid w-full max-w-sm items-center gap-1.5">
-                                <FormLabel>{'CV (opcional)'}</FormLabel>
-                                <FormControl>
-                                    <Input type="file" {...field} />
-                                </FormControl>
-                            </div>
-                        </FormItem>
-                    )}
-                />
-                <Separator />
                 <div className="flex flex-col gap-4">
-                    <Label>Questionario</Label>
+                    <Label>Cuestionario</Label>
                     <div className="flex flex-col gap-1.5">
-                        {offer.form?.questions.map((question, index) => {
+                        {offerForm.questions.map((question, index) => {
                             return (
                                 <FormField
                                     key={index}
@@ -73,7 +67,6 @@ const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
                                         <FormItem>
                                             <FormLabel>{question}</FormLabel>
                                             <Textarea rows={2} {...field} />
-                                            {/* <FormMessage /> */}
                                         </FormItem>
                                     )}
                                 />
@@ -82,7 +75,10 @@ const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
                     </div>
                 </div>
                 <Separator />
-                <Button className="w-full" type="submit">
+                <Button className="w-full" type="submit" disabled={loading}>
+                    {loading && (
+                        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                    )}
                     Confirmar inscripción
                 </Button>
             </form>
