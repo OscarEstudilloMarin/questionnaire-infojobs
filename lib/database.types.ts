@@ -63,6 +63,7 @@ export interface Database {
           created_at: string | null
           creator_id: string | null
           description: string | null
+          form: Json | null
           id: number
           salary: number | null
           title: string | null
@@ -76,6 +77,7 @@ export interface Database {
           created_at?: string | null
           creator_id?: string | null
           description?: string | null
+          form?: Json | null
           id?: number
           salary?: number | null
           title?: string | null
@@ -89,6 +91,7 @@ export interface Database {
           created_at?: string | null
           creator_id?: string | null
           description?: string | null
+          form?: Json | null
           id?: number
           salary?: number | null
           title?: string | null

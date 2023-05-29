@@ -13,9 +13,9 @@ const LabeledInput = ({
 }: LabeledInputProps): JSX.Element => {
     return (
         <div className="flex flex-col gap-3">
-            <label className="text-base font-normal leading-5">
+            <p className="text-base font-normal leading-5">
                 {parse ? parseLabel(label) : label}
-            </label>
+            </p>
             <Input {...inputProps} />
         </div>
     )

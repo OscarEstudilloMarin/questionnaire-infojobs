@@ -11,6 +11,7 @@ import { createOffer } from '@/service/offers-service'
 import { useRouter } from 'next/navigation'
 import { Icons } from '@/components/icons'
 import { useToast } from '@/hooks/use-toast'
+import Questionnaire from '@/components/questionnaire'
 
 const OfferForm = (): JSX.Element => {
     const [formState, setFormState] = useState<OfferFormState>(
@@ -29,7 +30,7 @@ const OfferForm = (): JSX.Element => {
 
     const publishOffer = async () => {
         setLoading(true)
-        await createOffer({ offer: formState })
+        // await createOffer({ offer: formState })
         navigateToMain()
         toast({
             title: 'Oferta creada con éxito!',
@@ -45,24 +46,23 @@ const OfferForm = (): JSX.Element => {
             <form onSubmit={publishOffer}>
                 <div className="flex flex-1 flex-col">
                     <section className="flex flex-row items-center justify-between py-12">
-                        <h2 className="font flex flex-1 text-2xl font-bold">
-                            Create offer page
-                        </h2>
+                        <p className="font flex flex-1 text-2xl font-bold">
+                            Crear oferta
+                        </p>
                         <div className="gap flex flex-row items-center gap-x-4">
-                            <Button variant="secondary">Cancel</Button>
                             <Button variant="default" type="submit">
                                 {loading && (
                                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                                 )}
-                                Publish
+                                Publicar
                             </Button>
                         </div>
                     </section>
-                    <section className="flex flex-row gap-12">
-                        <div className="flex flex-1 flex-col">
+                    <section className="flex justify-between gap-12">
+                        <div className="flex w-1/2 flex-col">
                             <OfferFormFields />
                         </div>
-                        <div className="flex flex-1 flex-col justify-center rounded-lg">
+                        <div className="flex w-1/2 flex-col pt-8">
                             <OfferPreview />
                         </div>
                     </section>

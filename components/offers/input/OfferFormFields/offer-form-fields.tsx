@@ -14,7 +14,7 @@ const OfferFormFields = (): JSX.Element => {
     ) as OfferFormContextType
 
     return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
             {Object.entries(state).map((item, index) => (
                 <LabeledInput
                     key={index}
