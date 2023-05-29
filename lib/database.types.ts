@@ -108,18 +108,21 @@ export interface Database {
         Row: {
           created_at: string | null
           id: string
+          image: string | null
           name: string | null
           type: string | null
         }
         Insert: {
           created_at?: string | null
           id: string
+          image?: string | null
           name?: string | null
           type?: string | null
         }
         Update: {
           created_at?: string | null
           id?: string
+          image?: string | null
           name?: string | null
           type?: string | null
         }

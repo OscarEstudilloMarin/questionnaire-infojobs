@@ -42,10 +42,17 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
             className="flex h-fit w-full cursor-pointer items-center gap-5 bg-white p-5 transition-colors hover:bg-accent"
             onClick={() => router.push(`/offers/${offer.id}`)}
         >
-            <div className="h-fit w-1/4 rounded-md border-[1px] border-solid border-border bg-white">
+            <div
+                className={`h-fit w-1/4 ${
+                    !offer?.user.image
+                        ? 'rounded-md border-[1px] border-solid border-border'
+                        : ''
+                } bg-white`}
+            >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={
+                        offer?.user.image ||
                         'https://components.infojobs.com/statics/images/pic-company-logo.png'
                     }
                     alt={'icon'}

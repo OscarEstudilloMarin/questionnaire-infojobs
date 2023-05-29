@@ -7,11 +7,9 @@ import OfferFormFields from '@/components/offers/input/OfferFormFields/offer-for
 import OfferPreview from '@/components/offers/display/OfferPreview/OfferPreview'
 import { useState } from 'react'
 import { OfferFormState } from '@/components/offers/input/OfferFormFields/offer-form-fields.types'
-import { createOffer } from '@/service/offers-service'
 import { useRouter } from 'next/navigation'
 import { Icons } from '@/components/icons'
 import { useToast } from '@/hooks/use-toast'
-import Questionnaire from '@/components/questionnaire'
 
 const OfferForm = (): JSX.Element => {
     const [formState, setFormState] = useState<OfferFormState>(
@@ -61,9 +59,6 @@ const OfferForm = (): JSX.Element => {
                     <section className="flex justify-between gap-12">
                         <div className="flex w-1/2 flex-col">
                             <OfferFormFields />
-                        </div>
-                        <div className="flex w-1/2 flex-col pt-8">
-                            <OfferPreview />
                         </div>
                     </section>
                 </div>

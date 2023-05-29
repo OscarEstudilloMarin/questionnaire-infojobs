@@ -19,14 +19,14 @@ const OfferPreview = ({
         work_type,
         contract_type,
         salary,
-        user: { name: employer },
+        user: { name: employer, image: employer_image },
     },
 }: OfferPreviewProps): JSX.Element => {
     return (
         <div className="flex flex-col rounded-lg bg-white pb-8">
             <div className="flex h-40 w-full rounded-t-lg bg-slate-300">
                 {banner_image && (
-                    <Image
+                    <img
                         alt="banner-image"
                         className="object-cover"
                         src={banner_image}
@@ -37,8 +37,9 @@ const OfferPreview = ({
                 <div className="flex flex-col">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                        className="aspect-square w-16 rounded-lg"
+                        className="aspect-square w-16 rounded-lg object-cover"
                         src={
+                            employer_image ||
                             'https://components.infojobs.com/statics/images/pic-company-logo.png'
                         }
                         alt=""

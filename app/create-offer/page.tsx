@@ -1,9 +1,7 @@
-import OfferForm from '@/components/offers/layout/OfferForm'
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { Database } from '@/lib/database.types'
 import { redirect } from 'next/navigation'
-import Questionnaire from '@/components/questionnaire'
 
 import CreateOfferForm from '@/components/create-offer-form'
 
