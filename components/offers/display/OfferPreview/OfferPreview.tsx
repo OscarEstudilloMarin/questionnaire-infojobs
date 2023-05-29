@@ -1,25 +1,35 @@
-import { useContext } from 'react'
+'use client'
+
 import OfferHeader from '../OfferHeader/OfferHeader'
-import {
-    OfferFormContext,
-    OfferFormContextType,
-} from '../../contexts/offer-form'
 import { Separator } from '@radix-ui/react-separator'
 import Image from 'next/image'
+import { SupabaseOfferWithUser } from '@/lib/collection'
+import { Banknote, Briefcase, FileText, Laptop, MapPin } from 'lucide-react'
 
-const OfferPreview = (): JSX.Element => {
-    const {
-        state: { bannerImage, city, workType, salary, contractType, category },
-    } = useContext(OfferFormContext) as OfferFormContextType
+export interface OfferPreviewProps {
+    offer: SupabaseOfferWithUser
+}
 
+const OfferPreview = ({
+    offer: {
+        title,
+        banner_image,
+        city,
+        category,
+        work_type,
+        contract_type,
+        salary,
+        user: { name: employer },
+    },
+}: OfferPreviewProps): JSX.Element => {
     return (
         <div className="flex flex-col rounded-lg bg-white pb-8">
             <div className="flex h-40 w-full rounded-t-lg bg-slate-300">
-                {bannerImage && (
+                {banner_image && (
                     <Image
                         alt="banner-image"
                         className="object-cover"
-                        src={bannerImage}
+                        src={banner_image}
                     />
                 )}
             </div>
@@ -36,40 +46,55 @@ const OfferPreview = (): JSX.Element => {
                 </div>
 
                 <div className="flex flex-col">
-                    <OfferHeader />
+                    <OfferHeader title={title} employer={employer} />
                 </div>
             </div>
             <div className="flex flex-row justify-center">
                 <div className="flex flex-col gap-1 px-4">
                     {city && (
-                        <span className="max-w-[125px] truncate whitespace-nowrap text-xs text-gray-400">
-                            {city}
-                        </span>
+                        <div className="flex flex-row gap-1">
+                            <MapPin size={14} color="gray" />
+                            <span className="max-w-[125px] truncate whitespace-nowrap text-xs text-gray-400">
+                                {city}
+                            </span>
+                        </div>
                     )}
                     <Separator orientation="vertical" />
                     {category && (
-                        <span className="text-xs text-gray-400">
-                            {category}
-                        </span>
+                        <div className="flex flex-row gap-1">
+                            <Laptop size={14} color="gray" />
+                            <span className="text-xs text-gray-400">
+                                {category}
+                            </span>
+                        </div>
                     )}
                     <Separator orientation="vertical" />
-                    {workType && (
-                        <span className="text-xs text-gray-400">
-                            {workType}
-                        </span>
+                    {work_type && (
+                        <div className="flex flex-row gap-1">
+                            <Briefcase size={14} color="gray" />
+                            <span className="text-xs text-gray-400">
+                                {work_type}
+                            </span>
+                        </div>
                     )}
                 </div>
                 <div className="flex flex-col gap-1 px-4">
-                    {contractType && (
-                        <span className="max-w-[125px] truncate whitespace-nowrap text-xs text-gray-400">
-                            {contractType}
-                        </span>
+                    {contract_type && (
+                        <div className="flex flex-row gap-1">
+                            <FileText size={14} color="gray" />
+                            <span className="max-w-[125px] truncate whitespace-nowrap text-xs text-gray-400">
+                                {contract_type}
+                            </span>
+                        </div>
                     )}
                     <Separator orientation="vertical" />
                     {salary && (
-                        <span className="text-xs text-gray-400">
-                            {salary} €
-                        </span>
+                        <div className="flex flex-row gap-1">
+                            <Banknote size={14} color="gray" />
+                            <span className="text-xs text-gray-400">
+                                {salary} €
+                            </span>
+                        </div>
                     )}
                 </div>
             </div>

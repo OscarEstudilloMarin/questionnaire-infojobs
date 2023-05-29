@@ -5,6 +5,7 @@ import type { SupabaseOfferWithUser } from '@/lib/collection'
 
 import { Card, CardDescription, CardTitle } from '@/components/ui/card'
 import ApplicationForm from '@/components/application-form'
+import OfferPreview from '@/components/offers/display/OfferPreview/OfferPreview'
 
 const Offer = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     return (
@@ -69,7 +70,7 @@ export default async function OfferPage({
     return (
         <div className="flex flex-col gap-5 sm:flex-row">
             <div className="w-1/2 p-5">
-                <Offer offer={offer} />
+                <OfferPreview offer={offer} />
             </div>
             <div className="w-1/2 p-5">
                 <Application offer={offer} />
