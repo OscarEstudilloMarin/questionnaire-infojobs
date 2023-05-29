@@ -20,3 +20,24 @@ export const createOffer = async (
         body: JSON.stringify(body),
     }).then((res) => res.json())
 }
+
+export const applyOffer = async (
+    offerId: number,
+    questions: string[],
+    answers: string[]
+): Promise<void> => {
+    const response = await fetch('/api/validate', {
+        method: 'POST',
+        body: JSON.stringify({
+            questions,
+            answers,
+        }),
+    })
+
+    const formattedResponse = await response.json()
+
+    return await fetch(`/api/offers/${offerId}`, {
+        method: 'POST',
+        body: JSON.stringify(formattedResponse.data),
+    }).then((res) => res.json())
+}
