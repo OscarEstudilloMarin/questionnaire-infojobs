@@ -6,6 +6,7 @@ import type { SupabaseOfferWithUser } from '@/lib/collection'
 import { Card } from '@/components/ui/card'
 import ApplicationForm from '@/components/application-form'
 import OfferPreview from '@/components/offers/display/OfferPreview/OfferPreview'
+import ApplicationsList from '@/components/application-list'
 
 const Application = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     return (
@@ -25,6 +26,14 @@ export default async function OfferPage({
         cookies,
     })
 
+    const { data } = await supabase.auth.getUser()
+
+    const { data: user } = await supabase
+        .from('user')
+        .select('*')
+        .eq('id', data.user?.id)
+        .single()
+
     const { data: offer } = (await supabase
         .from('offer')
         .select(`*, user (*)`)
@@ -37,7 +46,11 @@ export default async function OfferPage({
                 <OfferPreview offer={offer} />
             </div>
             <div className="flex-1 p-5">
-                <Application offer={offer} />
+                {user?.type === 'candidate' ? (
+                    <Application offer={offer} />
+                ) : (
+                    <ApplicationsList offerId={offer.id} />
+                )}
             </div>
         </div>
     )

@@ -36,3 +36,9 @@ En el proyecto se han usado nuevas tecnologías con tal de aprender.
 Creemos que esta funcionalidad tendría mucho sentido dentro de Infojobs, y añadiría un gran valor a grandes clientes.
 
 Como posible mejora, podría relacionarse con los conocimientos necesarios (tags) u otros campos para ser una funcionalidad todavía más fácil de integrar en la oferta.
+
+#### MEJORAS DEL CÓDIGO
+
+El uso de auth no está bien controlado, debería usarse un hook para obtener la información de user en todo momento y sincronizarlo con la sesión.
+
+Se deben extraer algunos componentes para mejorar la reutilización del código y el uso de server side components.
