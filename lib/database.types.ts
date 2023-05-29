@@ -38,18 +38,21 @@ export interface Database {
         Row: {
           candidate_id: string | null
           created_at: string | null
+          form_mark: number | null
           id: number
           offer_id: number | null
         }
         Insert: {
           candidate_id?: string | null
           created_at?: string | null
+          form_mark?: number | null
           id?: number
           offer_id?: number | null
         }
         Update: {
           candidate_id?: string | null
           created_at?: string | null
+          form_mark?: number | null
           id?: number
           offer_id?: number | null
         }

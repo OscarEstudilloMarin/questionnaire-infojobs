@@ -36,12 +36,12 @@ const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     })
 
     const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-        console.log(data)
         setLoading(true)
 
         await applyOffer(offer.id, offerForm.questions, data.answers)
 
         setLoading(false)
+        form.reset()
         toast({
             title: 'Inscripción realizada con éxito',
             variant: 'default',

@@ -16,7 +16,16 @@ export async function POST(
     const { data: userData } = await supabase.auth.getUser()
 
     const body = await request.json()
-    console.log('body', body)
 
-    return NextResponse.json({})
+    const formattedFormMark = Number(body)
+
+    const { data } = await supabase.from('application').insert([
+        {
+            offer_id: Number(params.id),
+            candidate_id: userData.user?.id,
+            form_mark: formattedFormMark,
+        },
+    ])
+
+    return NextResponse.json(data)
 }
