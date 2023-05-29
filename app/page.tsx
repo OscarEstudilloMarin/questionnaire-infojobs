@@ -18,8 +18,10 @@ export default async function Home() {
 
     return (
         <main className="flex w-full flex-col gap-4 overflow-y-auto p-10">
-            {user?.type === 'employer' && <CreateOfferBtn />}
-
+            <div className="mb-4 flex flex-row justify-between">
+                <h1 className="text-3xl font-bold">Ofertas</h1>
+                {user?.type === 'employer' && <CreateOfferBtn />}
+            </div>
             <OffersGrid />
         </main>
     )

@@ -33,7 +33,7 @@ const OfferPreview = ({
                     />
                 )}
             </div>
-            <div className="my-8 flex flex-row items-center justify-center gap-4">
+            <div className="my-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <div className="flex flex-col">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
