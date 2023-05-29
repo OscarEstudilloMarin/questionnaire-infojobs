@@ -2,7 +2,16 @@ import { SupabaseOfferWithUser } from '@/lib/collection'
 
 import type { FormValues } from '@/components/create-offer-form'
 
-export const getOffers = async (): Promise<SupabaseOfferWithUser[]> => {
+export const getOffers = async ({
+    creatorId,
+}: {
+    creatorId?: string
+}): Promise<SupabaseOfferWithUser[]> => {
+    if (creatorId) {
+        return await fetch(`/api/offers?creatorId=${creatorId}`).then((res) =>
+            res.json()
+        )
+    }
     return await fetch('/api/offers').then((res) => res.json())
 }
 

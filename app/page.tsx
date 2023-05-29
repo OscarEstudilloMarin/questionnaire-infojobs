@@ -22,7 +22,9 @@ export default async function Home() {
                 <h1 className="text-3xl font-bold">Ofertas</h1>
                 {user?.type === 'employer' && <CreateOfferBtn />}
             </div>
-            <OffersGrid />
+            <OffersGrid
+                creatorId={user?.type === 'employer' ? user?.id : undefined}
+            />
         </main>
     )
 }

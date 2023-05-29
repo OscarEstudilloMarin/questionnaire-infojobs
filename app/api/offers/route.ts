@@ -2,13 +2,25 @@ import { NextResponse } from 'next/server'
 import { createRouteHandlerClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import { Database } from '@/lib/database.types'
+import { NextApiRequest } from 'next'
 
-export async function GET() {
+export async function GET(req: NextApiRequest) {
     const supabase = createRouteHandlerClient<Database>({ cookies })
 
-    const { data } = await supabase.from('offer').select(`*, user (*)`)
+    console.log(req.query)
 
-    return NextResponse.json(data)
+    if (req.query?.creatorId) {
+        const { data: offers } = await supabase
+            .from('offer')
+            .select(`*, user (*)`)
+            .match({ creator_id: req.query.creatorId })
+        return NextResponse.json(offers)
+    } else {
+        const { data: offers } = await supabase
+            .from('offer')
+            .select(`*, user (*)`)
+        return NextResponse.json(offers)
+    }
 }
 
 export async function POST(req: Request) {
