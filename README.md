@@ -20,7 +20,7 @@ Hemos implementado una funcionalidad que dados unos temas, genera distintas preg
 
 Podéis crear una cuenta o bien usar el siguiente usuario de test:
 
-Username: user@test.com
+Username: user@test.com  
 Password: User123!
 
 #### TECNOLOGÍAS USADAS
