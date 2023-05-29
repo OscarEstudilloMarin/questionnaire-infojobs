@@ -5,6 +5,8 @@ import { Database } from '@/lib/database.types'
 import { redirect } from 'next/navigation'
 import Questionnaire from '@/components/questionnaire'
 
+import CreateOfferForm from '@/components/create-offer-form'
+
 export default async function CreateOfferPage(): Promise<JSX.Element> {
     const supabase = createServerComponentClient<Database>({ cookies })
 
@@ -21,9 +23,8 @@ export default async function CreateOfferPage(): Promise<JSX.Element> {
     }
 
     return (
-        <div className="flex flex-col space-y-5 px-5">
-            <OfferForm />
-            <Questionnaire />
+        <div className="flex px-5">
+            <CreateOfferForm />
         </div>
     )
 }

@@ -30,7 +30,7 @@ const OfferForm = (): JSX.Element => {
 
     const publishOffer = async () => {
         setLoading(true)
-        await createOffer({ offer: formState })
+        // await createOffer({ offer: formState })
         navigateToMain()
         toast({
             title: 'Oferta creada con éxito!',

@@ -1,12 +1,13 @@
-import { OfferFormState } from '@/components/offers/input/OfferFormFields/offer-form-fields.types'
 import { SupabaseOfferWithUser } from '@/lib/collection'
+
+import type { FormValues } from '@/components/create-offer-form'
 
 export const getOffers = async (): Promise<SupabaseOfferWithUser[]> => {
     return await fetch('api/offers').then((res) => res.json())
 }
 
 interface PublishOfferBody {
-    offer: OfferFormState
+    offer: FormValues
 }
 
 export const createOffer = async (
