@@ -1,4 +1,4 @@
-# AUTO QUESTIONARIO - INFOJOBS HACKATÓN
+# AUTO CUESTIONARIO - INFOJOBS HACKATÓN
 
 Proyecto realizado por:
 
@@ -29,7 +29,7 @@ En el proyecto se han usado nuevas tecnologías con tal de aprender.
 
 -   NextJS 13 App directory
 -   Supabase
--   Zustand, react-hook-form, Shadcn, Zod
+-   useSWR, react-hook-form, Shadcn UI, Zod, tailwindCSS, typescript
 
 #### USO REAL
 
