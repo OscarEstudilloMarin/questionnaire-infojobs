@@ -10,8 +10,12 @@ interface OfferHeaderProps {
 const OfferHeader = ({ title, employer }: OfferHeaderProps): JSX.Element => {
     return (
         <div className="flex flex-col gap-0.5">
-            <p className="text-lg font-bold">{title}</p>
-            <p className="text-sm font-normal">{employer}</p>
+            <p className="text-center text-lg font-bold sm:text-left">
+                {title}
+            </p>
+            <p className="text-center text-sm font-normal sm:text-left">
+                {employer}
+            </p>
         </div>
     )
 }

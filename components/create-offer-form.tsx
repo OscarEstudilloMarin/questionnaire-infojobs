@@ -116,181 +116,203 @@ export default function CreateOfferForm() {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="flex w-full flex-col gap-4"
+                className="flex w-full flex-col gap-8"
             >
-                <div className="flex justify-end">
+                <div className="flex flex-row">
+                    <h1 className="flex-1 text-3xl font-bold">Crear oferta</h1>
                     <Button type="submit">Publicar</Button>
                 </div>
+                <h2 className="text-lg font-medium text-gray-400">
+                    Añade a continuación la información de tu oferta. Esta será
+                    visualizada por los candidatos.
+                </h2>
 
-                <div className="grid grid-cols-2 gap-2">
-                    <FormField
-                        control={form.control}
-                        name="title"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="grid w-auto max-w-md items-center gap-1.5">
-                                    <FormLabel>Título</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                </div>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="description"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="grid max-w-md items-center gap-1.5">
-                                    <FormLabel>Descripción</FormLabel>
-                                    <FormControl>
-                                        <Textarea rows={2} {...field} />
-                                    </FormControl>
-                                </div>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="category"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="grid w-full max-w-md items-center gap-1.5">
-                                    <FormLabel>Categoria</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                </div>
-                            </FormItem>
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name="city"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="grid w-full max-w-md items-center gap-1.5">
-                                    <FormLabel>Ciudad</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                </div>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="contract_type"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="grid w-full max-w-md items-center gap-1.5">
-                                    <FormLabel>Tipo de contrato</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                </div>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="work_type"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="grid w-full max-w-md items-center gap-1.5">
-                                    <FormLabel>Tipo de trabajo</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                </div>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="salary"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="grid w-full max-w-md items-center gap-1.5">
-                                    <FormLabel>Salario</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                </div>
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="banner_image"
-                        render={({ field }) => (
-                            <FormItem>
-                                <div className="grid w-full max-w-md items-center gap-1.5">
-                                    <FormLabel>Imagen de banner</FormLabel>
-                                    <FormControl>
-                                        <Input {...field} />
-                                    </FormControl>
-                                </div>
-                            </FormItem>
-                        )}
-                    />
+                <div className="my-8 flex w-full flex-col gap-6 sm:flex-row">
+                    <div className="flex flex-1 flex-col gap-2">
+                        <FormField
+                            control={form.control}
+                            name="title"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="grid w-auto  items-center gap-1.5">
+                                        <FormLabel>Título</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="description"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="grid  items-center gap-1.5">
+                                        <FormLabel>Descripción</FormLabel>
+                                        <FormControl>
+                                            <Textarea rows={2} {...field} />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="category"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <FormLabel>Categoria</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="city"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <FormLabel>Ciudad</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                    </div>
+                    <div className="flex flex-1 flex-col gap-2 sm:justify-between">
+                        <FormField
+                            control={form.control}
+                            name="contract_type"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <FormLabel>Tipo de contrato</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="work_type"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <FormLabel>Tipo de trabajo</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="salary"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="grid w-full  items-center gap-1.5">
+                                        <FormLabel>Salario</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                        <FormField
+                            control={form.control}
+                            name="banner_image"
+                            render={({ field }) => (
+                                <FormItem>
+                                    <div className="grid w-full items-center gap-1.5">
+                                        <FormLabel>Imagen de banner</FormLabel>
+                                        <FormControl>
+                                            <Input {...field} />
+                                        </FormControl>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+                    </div>
                 </div>
 
                 <Separator />
 
-                <div className="flex space-x-5">
-                    <Textarea
-                        placeholder="Preguntas sobre useEffect, useState y useMemo de nivel junior"
-                        onChange={(e) => setInput(e.target.value)}
-                        value={input}
-                        className="w-[500px]"
-                        rows={3}
-                    />
-                    <Select
-                        onValueChange={(value) => setNumber(Number(value) + 1)}
-                    >
-                        <SelectTrigger className="w-[250px]">
-                            <SelectValue placeholder="Número de preguntas" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                {Array.from(Array(5).keys()).map((item) => (
-                                    <SelectItem
-                                        key={item}
-                                        value={item.toString()}
+                <div className="flex flex-1 flex-col gap-4 sm:flex-row">
+                    <div className="flex-1">
+                        <p className="mb-4 mt-5 text-xl font-bold">Preguntas</p>
+                        {questionsWatch.length > 0 ? (
+                            <div className="space-y-2">
+                                {questionsWatch.map((question, index) => (
+                                    <Card
+                                        key={index}
+                                        className="md: max-w-xs p-3 sm:max-w-sm lg:max-w-xl"
                                     >
-                                        {item + 1}
-                                    </SelectItem>
+                                        <p>{question}</p>
+                                    </Card>
                                 ))}
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-
-                    <Button onClick={generateQuestions} disabled={loading}>
-                        {loading && (
-                            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                            </div>
+                        ) : (
+                            <p className="my-4 text-gray-400">
+                                No has generado ningún formulario todavía
+                            </p>
                         )}
-                        Generar
-                    </Button>
-                </div>
-
-                {questionsWatch.length > 0 && (
-                    <div className="space-y-3">
-                        <p className="mt-5 text-xl font-bold">Preguntas</p>
-                        <div className="space-y-2">
-                            {questionsWatch.map((question, index) => (
-                                <Card
-                                    key={index}
-                                    className="max-w-xs p-3 sm:max-w-sm md:max-w-md lg:max-w-xl"
-                                >
-                                    <p>{question}</p>
-                                </Card>
-                            ))}
-                        </div>
                     </div>
-                )}
+                    <div className="flex flex-1 flex-col gap-4">
+                        <p className="mt-5 text-xl font-bold">Parámetros</p>
+                        <p>Qué preguntas quieres generar?</p>
+                        <Textarea
+                            placeholder="Preguntas sobre useEffect, useState y useMemo de nivel junior"
+                            onChange={(e) => setInput(e.target.value)}
+                            value={input}
+                            className="flex-1"
+                            rows={3}
+                        />
+                        <p>Cuántas preguntas quieres generar?</p>
+                        <Select
+                            onValueChange={(value) =>
+                                setNumber(Number(value) + 1)
+                            }
+                        >
+                            <SelectTrigger className="flex-1">
+                                <SelectValue placeholder="Número de preguntas" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectGroup>
+                                    {Array.from(Array(5).keys()).map((item) => (
+                                        <SelectItem
+                                            key={item}
+                                            value={item.toString()}
+                                        >
+                                            {item + 1}
+                                        </SelectItem>
+                                    ))}
+                                </SelectGroup>
+                            </SelectContent>
+                        </Select>
+
+                        <Button
+                            onClick={generateQuestions}
+                            disabled={loading}
+                            className="mt-3"
+                        >
+                            {loading && (
+                                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                            )}
+                            Generar
+                        </Button>
+                    </div>
+                </div>
             </form>
         </Form>
     )
