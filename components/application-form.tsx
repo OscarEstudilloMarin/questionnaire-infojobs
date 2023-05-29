@@ -17,24 +17,21 @@ import {
     FormItem,
     FormLabel,
 } from '@/components/ui/form'
+import { SupabaseOfferWithUser } from '@/lib/collection'
 
 const FormSchema = z.object({
     cv: z.string().optional(),
     answers: z.array(z.string().nonempty()),
 })
 
-const ApplicationForm = () => {
-    const questions = [
-        '¿Qué es useState en React y para qué se utiliza?',
-        '¿Cuál es el propósito principal de useEffect en React?',
-        '¿Cuándo deberías usar useMemo en React y por qué es útil?',
-        '¿Cómo se utiliza useState para manejar un valor booleano en React?',
-    ]
+const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
+    // const questions = offer.form?.questions as string[]
+
     const form = useForm<z.infer<typeof FormSchema>>({
         resolver: zodResolver(FormSchema),
         defaultValues: {
             cv: '',
-            answers: Array(questions.length).fill(''),
+            answers: Array(3).fill(''),
         },
     })
 
@@ -66,7 +63,7 @@ const ApplicationForm = () => {
                 <div className="flex flex-col gap-4">
                     <Label>Questionario</Label>
                     <div className="flex flex-col gap-1.5">
-                        {questions.map((question, index) => {
+                        {offer.form?.questions.map((question, index) => {
                             return (
                                 <FormField
                                     key={index}

@@ -46,7 +46,7 @@ const Application = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     return (
         <Card className="space-y-5 p-5">
             <span className="text-md font-semibold">Inscripción:</span>
-            <ApplicationForm />
+            <ApplicationForm offer={offer} />
         </Card>
     )
 }
