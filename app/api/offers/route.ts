@@ -31,7 +31,7 @@ export async function POST(req: Request) {
 
     const offer = body.offer
 
-    const { data } = await supabase.from('offer').insert([
+    const { data, error } = await supabase.from('offer').insert([
         {
             title: offer.title,
             description: offer.description,
@@ -45,6 +45,12 @@ export async function POST(req: Request) {
             questions: offer.questions,
         },
     ])
+
+    if (error)
+        return NextResponse.json(
+            { error: 'Completa todos los campos del formulario' },
+            { status: 404 }
+        )
 
     return NextResponse.json(data)
 }
