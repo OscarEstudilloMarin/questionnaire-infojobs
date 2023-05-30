@@ -81,14 +81,16 @@ const ApplicationCard = ({
                 Fecha de inscripción:{' '}
                 {dayjs(application.created_at).format('DD/MM/YYYY HH:mm')}
             </div>
-            <div className="flex justify-end">
-                <Button onClick={donwloadCV}>
-                    {loading && (
-                        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                    )}
-                    Descargar CV
-                </Button>
-            </div>
+            {application.user.cv && (
+                <div className="flex justify-end">
+                    <Button onClick={donwloadCV}>
+                        {loading && (
+                            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                        )}
+                        Descargar CV
+                    </Button>
+                </div>
+            )}
         </Card>
     )
 }
