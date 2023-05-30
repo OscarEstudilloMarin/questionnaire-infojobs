@@ -1,10 +1,16 @@
 'use client'
 
+import { useState } from 'react'
+
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import useApplications from '@/hooks/use-applications'
 import { SupabaseApplicationWithUser } from '@/lib/collection'
 import dayjs from 'dayjs'
 import { Skeleton } from './ui/skeleton'
+import { Button } from './ui/button'
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import { Database } from '@/lib/database.types'
+import { Icons } from './icons'
 
 const ApplicationSkeleton = () => {
     return (
@@ -28,6 +34,30 @@ const ApplicationCard = ({
 }: {
     application: SupabaseApplicationWithUser
 }) => {
+    const [loading, setLoading] = useState(false)
+    const supabase = createClientComponentClient<Database>()
+
+    const donwloadCV = async () => {
+        setLoading(true)
+        const { data, error } = await supabase.storage
+            .from('candidate-cv')
+            .download(application.user.cv!)
+        if (data) {
+            const blobUrl = window.URL.createObjectURL(data)
+            const tempLink = document.createElement('a')
+            tempLink.href = blobUrl
+            tempLink.setAttribute('download', `${application.user.name}-cv.pdf`)
+            tempLink.click()
+        }
+
+        if (error) {
+            console.log(error)
+            return
+        }
+
+        setLoading(false)
+    }
+
     return (
         <Card className="space-y-5 p-5">
             <CardTitle>Candidato: {application.user.name}</CardTitle>
@@ -51,6 +81,16 @@ const ApplicationCard = ({
                 Fecha de inscripción:{' '}
                 {dayjs(application.created_at).format('DD/MM/YYYY HH:mm')}
             </div>
+            {application.user.cv && (
+                <div className="flex justify-end">
+                    <Button onClick={donwloadCV}>
+                        {loading && (
+                            <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
+                        )}
+                        Descargar CV
+                    </Button>
+                </div>
+            )}
         </Card>
     )
 }
