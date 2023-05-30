@@ -13,7 +13,7 @@ const OfferHeader = ({ title, employer }: OfferHeaderProps): JSX.Element => {
             <p className="text-center text-lg font-bold sm:text-left">
                 {title}
             </p>
-            <p className="text-center text-sm font-normal sm:text-left">
+            <p className="text-center text-sm font-normal text-primary sm:text-left">
                 {employer}
             </p>
         </div>

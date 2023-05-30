@@ -7,6 +7,11 @@ import { Card } from '@/components/ui/card'
 import ApplicationForm from '@/components/application-form'
 import OfferPreview from '@/components/offers/display/OfferPreview/OfferPreview'
 import ApplicationsList from '@/components/application-list'
+import Link from 'next/link'
+import { cn } from '@/lib/utils'
+import { buttonVariants } from '@/components/ui/button'
+import { Icons } from '@/components/icons'
+import QuestionnaireSummary from '@/components/offers/display/questionnaire-summary'
 
 const Application = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     return (
@@ -41,16 +46,27 @@ export default async function OfferPage({
         .single()) as { data: SupabaseOfferWithUser }
 
     return (
-        <div className="flex flex-col gap-5 md:flex-row">
-            <div className="flex-1 p-5">
-                <OfferPreview offer={offer} />
-            </div>
-            <div className="flex-1 p-5">
-                {user?.type === 'candidate' ? (
-                    <Application offer={offer} />
-                ) : (
-                    <ApplicationsList offerId={offer.id} />
-                )}
+        <div>
+            <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }))}>
+                <>
+                    <Icons.chevronLeft className="mr-2 h-4 w-4" />
+                    Volver
+                </>
+            </Link>
+            <div className="flex flex-col gap-5 md:flex-row">
+                <div className="flex-1 space-y-5 p-5">
+                    <OfferPreview offer={offer} />
+                    {user?.type === 'employer' && (
+                        <QuestionnaireSummary offer={offer} />
+                    )}
+                </div>
+                <div className="flex-1 p-5">
+                    {user?.type === 'candidate' ? (
+                        <Application offer={offer} />
+                    ) : user?.type === 'employer' ? (
+                        <ApplicationsList offerId={offer.id} />
+                    ) : null}
+                </div>
             </div>
         </div>
     )

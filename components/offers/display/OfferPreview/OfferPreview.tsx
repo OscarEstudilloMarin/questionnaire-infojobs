@@ -2,7 +2,6 @@
 
 import OfferHeader from '../OfferHeader/OfferHeader'
 import { Separator } from '@radix-ui/react-separator'
-import Image from 'next/image'
 import { SupabaseOfferWithUser } from '@/lib/collection'
 import { Banknote, Briefcase, FileText, Laptop, MapPin } from 'lucide-react'
 
@@ -26,7 +25,7 @@ const OfferPreview = ({
         <div className="flex flex-col rounded-lg bg-white pb-8">
             <div className="flex h-40 w-full rounded-t-lg bg-slate-300">
                 {banner_image && (
-                    <Image
+                    <img
                         alt="banner-image"
                         className="object-cover"
                         src={banner_image}
