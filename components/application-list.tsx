@@ -1,6 +1,6 @@
 'use client'
 
-import { Card, CardDescription, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import useApplications from '@/hooks/use-applications'
 import { SupabaseApplicationWithUser } from '@/lib/collection'
 import dayjs from 'dayjs'
@@ -33,8 +33,8 @@ const ApplicationCard = ({
             <CardTitle>{application.user.name}</CardTitle>
             <div>Nota del questionario: {application.form_mark}</div>
             <div className="flex flex-col">
-                <div>Respuestas:</div>
-                <CardDescription>
+                <div className="text-sm ">Respuestas:</div>
+                <CardContent className="text-sm text-gray-600">
                     {application.answers!.map((answer, index) => {
                         return (
                             <div key={index} className="flex gap-2">
@@ -45,7 +45,7 @@ const ApplicationCard = ({
                             </div>
                         )
                     })}
-                </CardDescription>
+                </CardContent>
             </div>
             <div className="text-sm">
                 Fecha de inscripción:{' '}
@@ -67,7 +67,12 @@ const ApplicationsList = ({ offerId }: { offerId: number }) => {
                           <ApplicationSkeleton key={i} />
                       ))
                     : applications?.map((application) => {
-                          return ApplicationCard({ application })
+                          return (
+                              <ApplicationCard
+                                  key={application.id}
+                                  application={application}
+                              />
+                          )
                       })}
             </div>
         </>
