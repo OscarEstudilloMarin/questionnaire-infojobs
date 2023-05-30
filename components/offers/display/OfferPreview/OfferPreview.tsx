@@ -26,7 +26,7 @@ const OfferPreview = ({
         <div className="flex flex-col rounded-lg bg-white pb-8">
             <div className="flex h-40 w-full rounded-t-lg bg-slate-300">
                 {banner_image && (
-                    <img
+                    <Image
                         alt="banner-image"
                         className="object-cover"
                         src={banner_image}
