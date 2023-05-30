@@ -17,6 +17,7 @@ import { useState } from 'react'
 import { Icons } from './icons'
 
 import { applyOffer } from '@/service/offers-service'
+import { useRouter } from 'next/navigation'
 
 const FormSchema = z.object({
     cv: z.string().optional(),
@@ -25,6 +26,7 @@ const FormSchema = z.object({
 
 const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     const [loading, setLoading] = useState(false)
+    const router = useRouter()
 
     const { questions } = offer
 
@@ -46,6 +48,7 @@ const ApplicationForm = ({ offer }: { offer: SupabaseOfferWithUser }) => {
             title: 'Inscripción realizada con éxito',
             variant: 'default',
         })
+        router.push('/')
     }
 
     return (

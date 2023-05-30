@@ -7,12 +7,9 @@ import { redirect } from 'next/navigation'
 import { Card } from '@/components/ui/card'
 import ApplicationForm from '@/components/application-form'
 import OfferPreview from '@/components/offers/display/OfferPreview/OfferPreview'
-import Link from 'next/link'
-import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
-import { Icons } from '@/components/icons'
 import QuestionnaireSummary from '@/components/offers/display/questionnaire-summary'
 import ApplicationsTable from '@/components/application-table/applicaitons'
+import BackButton from '@/components/back-button'
 
 const Application = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     return (
@@ -59,12 +56,7 @@ export default async function OfferPage({
 
     return (
         <div>
-            <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }))}>
-                <>
-                    <Icons.chevronLeft className="mr-2 h-4 w-4" />
-                    Volver
-                </>
-            </Link>
+            <BackButton />
             <div className="flex flex-col">
                 <div className="flex-1 space-y-5 p-5">
                     <OfferPreview offer={offer} />
