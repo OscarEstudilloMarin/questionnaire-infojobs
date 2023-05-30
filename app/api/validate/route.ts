@@ -20,6 +20,13 @@ const INITIAL_MESSAGES = [
         7.5
         `,
     },
+    {
+        role: ChatCompletionRequestMessageRoleEnum.System,
+        content: `Por ejemplo, si te doy un array con dos preguntas ["¿Qué es useState en React y para qué se utiliza?", "¿Cuál es el propósito principal de useEffect en React?"] y las respuestas ["No lo sé", "No lo sé"], la respuesta con la nota podría ser:
+
+        0
+        `,
+    },
 ]
 
 export async function POST(request: Request) {
