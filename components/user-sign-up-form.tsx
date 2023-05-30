@@ -32,36 +32,46 @@ export function UserSignUpForm({ from }: { from: string }) {
     })
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
+    console.log('errors', errors)
+
     async function onSubmit(data: FormData) {
+        console.log('formData', data)
         setIsLoading(true)
         try {
-            const { data: authData } = await supabase.auth.signUp({
-                email: data.email,
-                password: data.password,
-                options: {
-                    emailRedirectTo: `${location.origin}/auth/callback`,
-                },
-            })
+            const cvFile = data.cv[0]
+            const { data: bucket, error } = await supabase.storage
+                .from('candidate-cv')
+                .upload('test-cv.pdf', cvFile)
 
-            if (authData && authData.user) {
-                await supabase
-                    .from('user')
-                    .insert([
-                        { id: authData.user.id, name: data.name, type: from },
-                    ])
-            }
+            console.log('bucket', bucket, error)
+            // const { data: authData } = await supabase.auth.signUp({
+            //     email: data.email,
+            //     password: data.password,
+            //     options: {
+            //         emailRedirectTo: `${location.origin}/auth/callback`,
+            //     },
+            // })
 
-            toast({
-                title: 'Registro exitoso',
-                description:
-                    'Hemos enviado un correo de confirmación a tu email.',
-                variant: 'default',
-            })
+            // if (authData && authData.user) {
+            //     await supabase
+            //         .from('user')
+            //         .insert([
+            //             { id: authData.user.id, name: data.name, type: from },
+            //         ])
+            // }
 
-            reset()
+            // toast({
+            //     title: 'Registro exitoso',
+            //     description:
+            //         'Hemos enviado un correo de confirmación a tu email.',
+            //     variant: 'default',
+            // })
 
-            router.refresh()
+            // reset()
+
+            // router.refresh()
         } catch (error: any) {
+            console.log('error', error)
             toast({
                 title: 'Registro fallido',
                 description: 'Algo salió mal, por favor intenta de nuevo.',
@@ -124,6 +134,14 @@ export function UserSignUpForm({ from }: { from: string }) {
                                 {errors.password.message}
                             </p>
                         )}
+
+                        <Label htmlFor="cv">CV (opcional)</Label>
+                        <Input
+                            id="cv"
+                            type="file"
+                            disabled={isLoading}
+                            {...register('cv')}
+                        />
                     </div>
                     <Button variant="secondary" disabled={isLoading}>
                         {isLoading && (

@@ -14,4 +14,5 @@ export const userAuthSchema = z.object({
         .string()
         .min(2, 'El nombre debe tener al menos 2 caracteres')
         .optional(),
+    cv: z.any().optional(),
 })
