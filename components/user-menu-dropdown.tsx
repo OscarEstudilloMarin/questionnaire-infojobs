@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ChevronsUpDown, LogOut } from 'lucide-react'
+import { ChevronsUpDown, LogOut, Briefcase } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import {
@@ -62,8 +62,18 @@ export default function UserMenuDropdown({
                     <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-[180px] p-2">
+            <DropdownMenuContent align="end" className="w-[220px] p-2">
                 <DropdownMenuGroup>
+                    {user?.type === 'candidate' && (
+                        <DropdownMenuItem
+                            onSelect={() => router.push('/my-applications')}
+                            className="cursor-pointer"
+                        >
+                            <Briefcase className="mr-2 h-4 w-4" />
+                            Ver mis aplicaciones
+                        </DropdownMenuItem>
+                    )}
+
                     <DropdownMenuItem
                         onSelect={handleLogOut}
                         className="cursor-pointer"
