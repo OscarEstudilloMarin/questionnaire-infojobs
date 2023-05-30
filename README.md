@@ -1,34 +1,44 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AUTO CUESTIONARIO - INFOJOBS HACKATÓN
 
-## Getting Started
+Proyecto realizado por:
 
-First, run the development server:
+-   Estudillo Marín, Óscar
+-   García Gil, Guillem
+-   Qiu, Longbo
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## PROBLEMA IDENTIFICADO
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Algunas empresas reciben tantas candidaturas que es dificil o imposible analizarlas todas --> Se debe poder preordenar las candidaturas de forma automática.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## SOLUCIÓN PROPUESTA
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Hemos implementado una funcionalidad que dados unos temas, genera distintas preguntas que los candidatos deberán responder. Las respuestas son analizadas automáticamente para ordenar las candidaturas en función de la nota obtenida.
 
-## Learn More
+### DEMO
 
-To learn more about Next.js, take a look at the following resources:
+[ENLACE A VERCEL](questionnaire-infojobs-n7te90l8h-oscarestudillomarin.vercel.app)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Podéis crear una cuenta o bien usar el siguiente usuario de test:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Username: user@test.com  
+Password: User123!
 
-## Deploy on Vercel
+#### TECNOLOGÍAS USADAS
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+En el proyecto se han usado nuevas tecnologías con tal de aprender.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-   NextJS 13 App directory
+-   Supabase
+-   useSWR, react-hook-form, Shadcn UI, Zod, tailwindCSS, typescript
+
+#### USO REAL
+
+Creemos que esta funcionalidad tendría mucho sentido dentro de Infojobs, y añadiría un gran valor a grandes clientes.
+
+Como posible mejora, podría relacionarse con los conocimientos necesarios (tags) u otros campos para ser una funcionalidad todavía más fácil de integrar en la oferta.
+
+#### MEJORAS DEL CÓDIGO
+
+El uso de auth no está bien controlado, debería usarse un hook para obtener la información de user en todo momento y sincronizarlo con la sesión.
+
+Se deben extraer algunos componentes para mejorar la reutilización del código y el uso de server side components.
