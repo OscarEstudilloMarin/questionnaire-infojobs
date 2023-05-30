@@ -34,13 +34,13 @@ import { useRouter } from 'next/navigation'
 
 const FormSchema = z.object({
     title: z.string().nonempty(),
-    description: z.string().optional(),
-    category: z.string().optional(),
+    description: z.string().nonempty(),
+    category: z.string().nonempty(),
     banner_image: z.string().optional(),
-    city: z.string().optional(),
-    salary: z.string().optional(),
-    work_type: z.string().optional(),
-    contract_type: z.string().optional(),
+    city: z.string().nonempty(),
+    salary: z.string().nonempty(),
+    work_type: z.string().nonempty(),
+    contract_type: z.string().nonempty(),
     questions: z.array(z.string().nonempty()),
 })
 
@@ -73,14 +73,19 @@ export default function CreateOfferForm() {
 
     const onSubmit = async (data: FormValues) => {
         setLoading(true)
-        await createOffer({ offer: data })
-        setLoading(false)
-        router.push('/')
-        toast({
-            title: 'Oferta creada con éxito!',
-            description: 'Puedes ver la nueva oferta en la página principal.',
-            variant: 'default',
-        })
+        try {
+            await createOffer({ offer: data })
+            setLoading(false)
+            router.push('/')
+            toast({
+                title: 'Oferta creada con éxito!',
+                description:
+                    'Puedes ver la nueva oferta en la página principal.',
+                variant: 'default',
+            })
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     const generateQuestions = async (e: any) => {
