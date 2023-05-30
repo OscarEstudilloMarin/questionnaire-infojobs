@@ -15,17 +15,9 @@ const INITIAL_MESSAGES = [
 
         El formato de tu respuesta tiene que ser la media de las notas de cada respuesta. Si la primera respuesta la puntúas con un 5 y la segunda con un 10, tu respuesta tiene que ser 7.5. El formato de respuesta es únicamente la nota, sin texto adicional.
 
-        Por ejemplo, si te doy un array con dos preguntas ["¿Qué es useState en React y para qué se utiliza?", "¿Cuál es el propósito principal de useEffect en React?"] y las respuestas ["useState es un hook que se utiliza para manejar el estado de un componente en React", "useEffect es un hook que se utiliza para manejar el ciclo de vida de un componente en React"], la respuesta con la nota podría ser:
-
-        7.5
-        `,
-    },
-    {
-        role: ChatCompletionRequestMessageRoleEnum.System,
-        content: `Por ejemplo, si te doy un array con dos preguntas ["¿Qué es useState en React y para qué se utiliza?", "¿Cuál es el propósito principal de useEffect en React?"] y las respuestas ["No lo sé", "No lo sé"], la respuesta con la nota podría ser:
-
-        0
-        `,
+        Por ejemplo, si te doy un array con dos preguntas ["¿Qué es useState en React y para qué se utiliza?", "¿Cuál es el propósito principal de useEffect en React?"] y las respuestas ["useState es un hook que se utiliza para manejar el estado de un componente en React", "No lo sé"], debido a que una resupuesta es correcta y la otra no, la respuesta, siendo esta la media de las notas de las dos preguntas (10 y 0), debe ser:
+        
+        5`,
     },
 ]
 
@@ -46,11 +38,14 @@ export async function POST(request: Request) {
             {
                 role: ChatCompletionRequestMessageRoleEnum.User,
                 content: `
-                  Dadas estas preguntas: ${questions}. Puntúa las siguientes respuestas: ${answers} devolviendo únicamente la media de las notas, sin texto adicional. Sé estricto puntuando las respuestas que no se relacionen con la pregunta o que no tengan sentido con un 0.
+                  Dadas estas preguntas: ${questions}. Puntúa las siguientes respuestas: ${answers} devolviendo únicamente un mensaje con el número de la nota del test, sin texto adicional.
                 `,
             },
         ],
     })
+
+    console.log(completion.data)
+    console.log(completion.data.choices[0].message?.content)
 
     const data = completion.data.choices[0].message?.content ?? ''
 
