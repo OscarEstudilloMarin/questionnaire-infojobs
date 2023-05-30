@@ -45,6 +45,13 @@ export default async function OfferPage({
         .match({ id })
         .single()) as { data: SupabaseOfferWithUser }
 
+    const { data: application } = await supabase
+        .from('application')
+        .select('*')
+        .eq('offer_id', id)
+        .eq('candidate_id', user?.id)
+        .single()
+
     return (
         <div>
             <Link href="/" className={cn(buttonVariants({ variant: 'ghost' }))}>
@@ -61,7 +68,11 @@ export default async function OfferPage({
                     )}
                 </div>
                 <div className="flex-1 p-5">
-                    {user?.type === 'candidate' ? (
+                    {application ? (
+                        <div className="flex justify-center">
+                            <p>¡Ya has aplicado a esta oferta!</p>
+                        </div>
+                    ) : user?.type === 'candidate' ? (
                         <Application offer={offer} />
                     ) : user?.type === 'employer' ? (
                         <ApplicationsList offerId={offer.id} />
