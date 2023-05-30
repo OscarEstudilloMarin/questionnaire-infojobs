@@ -38,7 +38,7 @@ const FormSchema = z.object({
     category: z.string().nonempty(),
     banner_image: z.string().optional(),
     city: z.string().nonempty(),
-    salary: z.number().min(1),
+    salary: z.string().min(1),
     work_type: z.string().nonempty(),
     contract_type: z.string().nonempty(),
     questions: z.array(z.string().nonempty()),
@@ -60,7 +60,7 @@ export default function CreateOfferForm() {
             category: '',
             banner_image: '',
             city: '',
-            salary: 1000,
+            salary: '',
             work_type: '',
             contract_type: '',
             questions: [],
@@ -228,7 +228,7 @@ export default function CreateOfferForm() {
                                     <div className="grid w-full  items-center gap-1.5">
                                         <FormLabel>Salario</FormLabel>
                                         <FormControl>
-                                            <Input type="number" {...field} />
+                                            <Input {...field} />
                                         </FormControl>
                                     </div>
                                 </FormItem>
