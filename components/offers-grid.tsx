@@ -7,7 +7,7 @@ export default function OffersGrid({ creatorId }: { creatorId?: string } = {}) {
     const { offers } = useOffers({ creatorId: creatorId || undefined })
 
     return (
-        <div className="gap-4 sm:grid sm:grid-cols-2">
+        <div className="flex flex-col gap-4 sm:grid sm:grid-cols-2">
             {offers
                 ? offers.map((offer) => (
                       <OfferCard key={offer.id} offer={offer} />
