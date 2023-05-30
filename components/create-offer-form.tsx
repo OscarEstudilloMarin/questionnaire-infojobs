@@ -228,7 +228,7 @@ export default function CreateOfferForm() {
                                     <div className="grid w-full  items-center gap-1.5">
                                         <FormLabel>Salario</FormLabel>
                                         <FormControl>
-                                            <Input {...field} />
+                                            <Input type="number" {...field} />
                                         </FormControl>
                                     </div>
                                 </FormItem>
