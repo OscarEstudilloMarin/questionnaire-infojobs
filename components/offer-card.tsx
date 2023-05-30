@@ -51,7 +51,7 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
         >
             <div
                 className={`flex aspect-square w-1/4 items-center justify-center rounded-md ${
-                    !offer?.user.image
+                    !offer?.user?.image
                         ? ' border-[1px] border-solid border-border'
                         : ''
                 } bg-white`}
@@ -59,7 +59,7 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={
-                        offer?.user.image ||
+                        offer?.user?.image ||
                         'https://components.infojobs.com/statics/images/pic-company-logo.png'
                     }
                     alt={'icon'}
@@ -70,7 +70,7 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
                 <div className="space-y-1">
                     <CardTitle>{offer.title}</CardTitle>
                     <CardDescription className="uppercase text-primary">
-                        {offer.user.name}
+                        {offer.user?.name}
                     </CardDescription>
                 </div>
 

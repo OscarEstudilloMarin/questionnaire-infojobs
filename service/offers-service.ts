@@ -50,3 +50,7 @@ export const applyOffer = async (
         body: JSON.stringify({ mark: formattedResponse.data, answers }),
     }).then((res) => res.json())
 }
+
+export const appliedOffer = async (): Promise<SupabaseOfferWithUser[]> => {
+    return await fetch(`/api/offers/applied`).then((res) => res.json())
+}
