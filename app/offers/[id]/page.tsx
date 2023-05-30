@@ -2,6 +2,7 @@ import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
 import type { Database } from '@/lib/database.types'
 import type { SupabaseOfferWithUser } from '@/lib/collection'
+import { redirect } from 'next/navigation'
 
 import { Card } from '@/components/ui/card'
 import ApplicationForm from '@/components/application-form'
@@ -51,6 +52,10 @@ export default async function OfferPage({
         .eq('offer_id', id)
         .eq('candidate_id', user?.id)
         .single()
+
+    if (user?.type === 'employer' && offer.creator_id !== user.id) {
+        redirect('/')
+    }
 
     return (
         <div>

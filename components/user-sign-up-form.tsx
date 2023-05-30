@@ -44,10 +44,20 @@ export function UserSignUpForm({ from }: { from: string }) {
             })
 
             if (authData && authData.user) {
+                const cvFile = data.cv[0]
+                const { data: bucket } = await supabase.storage
+                    .from('candidate-cv')
+                    .upload(`${authData.user.id}-cv.pdf`, cvFile)
+
                 await supabase
                     .from('user')
                     .insert([
-                        { id: authData.user.id, name: data.name, type: from },
+                        {
+                            id: authData.user.id,
+                            name: data.name,
+                            type: from,
+                            cv: bucket?.path,
+                        },
                     ])
             }
 
@@ -62,6 +72,7 @@ export function UserSignUpForm({ from }: { from: string }) {
 
             router.refresh()
         } catch (error: any) {
+            console.log('error', error)
             toast({
                 title: 'Registro fallido',
                 description: 'Algo salió mal, por favor intenta de nuevo.',
@@ -124,6 +135,14 @@ export function UserSignUpForm({ from }: { from: string }) {
                                 {errors.password.message}
                             </p>
                         )}
+
+                        <Label htmlFor="cv">CV (opcional)</Label>
+                        <Input
+                            id="cv"
+                            type="file"
+                            disabled={isLoading}
+                            {...register('cv')}
+                        />
                     </div>
                     <Button variant="secondary" disabled={isLoading}>
                         {isLoading && (
