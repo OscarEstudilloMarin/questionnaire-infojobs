@@ -4,7 +4,7 @@ import { OfferFormProvider } from '../contexts/offer-form'
 import { initialOfferFormState } from '../input/OfferFormFields/offer-form-fields.types'
 import { Button } from '@/components/ui/button'
 import OfferFormFields from '@/components/offers/input/OfferFormFields/offer-form-fields'
-import OfferPreview from '@/components/offers/display/OfferPreview/OfferPreview'
+
 import { useState } from 'react'
 import { OfferFormState } from '@/components/offers/input/OfferFormFields/offer-form-fields.types'
 import { useRouter } from 'next/navigation'
