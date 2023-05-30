@@ -7,12 +7,12 @@ import { redirect } from 'next/navigation'
 import { Card } from '@/components/ui/card'
 import ApplicationForm from '@/components/application-form'
 import OfferPreview from '@/components/offers/display/OfferPreview/OfferPreview'
-import ApplicationsList from '@/components/application-list'
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { buttonVariants } from '@/components/ui/button'
 import { Icons } from '@/components/icons'
 import QuestionnaireSummary from '@/components/offers/display/questionnaire-summary'
+import ApplicationsTable from '@/components/application-table/applicaitons'
 
 const Application = ({ offer }: { offer: SupabaseOfferWithUser }) => {
     return (
@@ -65,7 +65,7 @@ export default async function OfferPage({
                     Volver
                 </>
             </Link>
-            <div className="flex flex-col gap-5 md:flex-row">
+            <div className="flex flex-col">
                 <div className="flex-1 space-y-5 p-5">
                     <OfferPreview offer={offer} />
                     {user?.type === 'employer' && (
@@ -80,7 +80,8 @@ export default async function OfferPage({
                     ) : user?.type === 'candidate' ? (
                         <Application offer={offer} />
                     ) : user?.type === 'employer' ? (
-                        <ApplicationsList offerId={offer.id} />
+                        // <ApplicationsList offerId={offer.id} />
+                        <ApplicationsTable offerId={offer.id} />
                     ) : null}
                 </div>
             </div>
