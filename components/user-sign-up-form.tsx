@@ -32,44 +32,45 @@ export function UserSignUpForm({ from }: { from: string }) {
     })
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-    console.log('errors', errors)
-
     async function onSubmit(data: FormData) {
-        console.log('formData', data)
         setIsLoading(true)
         try {
-            const cvFile = data.cv[0]
-            const { data: bucket, error } = await supabase.storage
-                .from('candidate-cv')
-                .upload('test-cv.pdf', cvFile)
+            const { data: authData } = await supabase.auth.signUp({
+                email: data.email,
+                password: data.password,
+                options: {
+                    emailRedirectTo: `${location.origin}/auth/callback`,
+                },
+            })
 
-            console.log('bucket', bucket, error)
-            // const { data: authData } = await supabase.auth.signUp({
-            //     email: data.email,
-            //     password: data.password,
-            //     options: {
-            //         emailRedirectTo: `${location.origin}/auth/callback`,
-            //     },
-            // })
+            if (authData && authData.user) {
+                const cvFile = data.cv[0]
+                const { data: bucket } = await supabase.storage
+                    .from('candidate-cv')
+                    .upload(`${authData.user.id}-cv.pdf`, cvFile)
 
-            // if (authData && authData.user) {
-            //     await supabase
-            //         .from('user')
-            //         .insert([
-            //             { id: authData.user.id, name: data.name, type: from },
-            //         ])
-            // }
+                await supabase
+                    .from('user')
+                    .insert([
+                        {
+                            id: authData.user.id,
+                            name: data.name,
+                            type: from,
+                            cv: bucket?.path,
+                        },
+                    ])
+            }
 
-            // toast({
-            //     title: 'Registro exitoso',
-            //     description:
-            //         'Hemos enviado un correo de confirmación a tu email.',
-            //     variant: 'default',
-            // })
+            toast({
+                title: 'Registro exitoso',
+                description:
+                    'Hemos enviado un correo de confirmación a tu email.',
+                variant: 'default',
+            })
 
-            // reset()
+            reset()
 
-            // router.refresh()
+            router.refresh()
         } catch (error: any) {
             console.log('error', error)
             toast({
