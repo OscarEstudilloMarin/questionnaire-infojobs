@@ -30,6 +30,7 @@ export default function UserMenuDropdown({
     const handleLogOut = async () => {
         await logout()
         router.refresh()
+        router.push('/')
     }
 
     return (

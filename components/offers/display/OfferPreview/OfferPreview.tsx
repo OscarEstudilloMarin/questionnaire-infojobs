@@ -2,7 +2,6 @@
 
 import OfferHeader from '../OfferHeader/OfferHeader'
 import { Separator } from '@radix-ui/react-separator'
-import Image from 'next/image'
 import { SupabaseOfferWithUser } from '@/lib/collection'
 import { Banknote, Briefcase, FileText, Laptop, MapPin } from 'lucide-react'
 

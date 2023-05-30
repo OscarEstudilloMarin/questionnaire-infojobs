@@ -30,7 +30,7 @@ const ApplicationCard = ({
 }) => {
     return (
         <Card className="space-y-5 p-5">
-            <CardTitle>{application.user.name}</CardTitle>
+            <CardTitle>Candidato: {application.user.name}</CardTitle>
             <div>Nota del questionario: {application.form_mark}</div>
             <div className="flex flex-col">
                 <div className="text-sm ">Respuestas:</div>
@@ -60,7 +60,7 @@ const ApplicationsList = ({ offerId }: { offerId: number }) => {
 
     return (
         <>
-            <h1 className="mb-5 text-2xl font-semibold">Inscripciones:</h1>
+            <p className="mb-5 text-2xl font-semibold">Inscripciones:</p>
             <div className="flex flex-col gap-5">
                 {isLoading
                     ? Array.from({ length: 5 }).map((_, i) => (

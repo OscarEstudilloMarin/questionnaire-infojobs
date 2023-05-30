@@ -97,7 +97,7 @@ const OfferCard = ({ offer, skeleton }: OfferCardProps) => {
 
                     <div className="flex h-4 items-center gap-2">
                         {offer.contract_type && (
-                            <span className="max-w-[125px] truncate whitespace-nowrap text-xs text-gray-400">
+                            <span className="max-w-[125px] truncate whitespace-nowrap text-xs text-gray-400 sm:w-fit sm:max-w-none">
                                 {`Contrato ${offer.contract_type}`}
                             </span>
                         )}
