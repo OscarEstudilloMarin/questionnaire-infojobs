@@ -8,11 +8,9 @@ export const metadata = {
 
 export default function CandidateRegisterPage() {
     return (
-        <div className="relative flex h-full w-full flex-col items-center justify-center px-10">
-            <div className="absolute left-4 top-4 md:left-8 md:top-8">
-                <BackButton />
-            </div>
-            <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+        <div>
+            <BackButton />
+            <div className="mx-auto flex w-full flex-col justify-center space-y-6 px-5 sm:w-[350px]">
                 <div className="flex flex-col space-y-2 text-center">
                     <h1 className="text-2xl font-semibold tracking-tight">
                         Registro de candidato

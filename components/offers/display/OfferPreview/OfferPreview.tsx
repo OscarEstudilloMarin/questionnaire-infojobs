@@ -19,6 +19,7 @@ const OfferPreview = ({
         contract_type,
         salary,
         user: { name: employer, image: employer_image },
+        description,
     },
 }: OfferPreviewProps): JSX.Element => {
     return (
@@ -48,6 +49,9 @@ const OfferPreview = ({
                 <div className="flex flex-col">
                     <OfferHeader title={title} employer={employer} />
                 </div>
+            </div>
+            <div className="flex items-center justify-center p-5">
+                <p>{description}</p>
             </div>
             <div className="flex flex-row justify-center">
                 <div className="flex flex-col gap-1 px-4">

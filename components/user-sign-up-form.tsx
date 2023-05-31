@@ -44,21 +44,23 @@ export function UserSignUpForm({ from }: { from: string }) {
             })
 
             if (authData && authData.user) {
-                const cvFile = data.cv[0]
-                const { data: bucket } = await supabase.storage
-                    .from('candidate-cv')
-                    .upload(`${authData.user.id}-cv.pdf`, cvFile)
+                let cvBucket = null
+                if (data.cv && data.cv.length > 0) {
+                    const cvFile = data.cv[0]
+                    const { data: bucket } = await supabase.storage
+                        .from('candidate-cv')
+                        .upload(`${authData.user.id}-cv.pdf`, cvFile)
+                    cvBucket = bucket
+                }
 
-                await supabase
-                    .from('user')
-                    .insert([
-                        {
-                            id: authData.user.id,
-                            name: data.name,
-                            type: from,
-                            cv: bucket?.path,
-                        },
-                    ])
+                await supabase.from('user').insert([
+                    {
+                        id: authData.user.id,
+                        name: data.name,
+                        type: from,
+                        cv: cvBucket?.path,
+                    },
+                ])
             }
 
             toast({
@@ -135,14 +137,17 @@ export function UserSignUpForm({ from }: { from: string }) {
                                 {errors.password.message}
                             </p>
                         )}
-
-                        <Label htmlFor="cv">CV (opcional)</Label>
-                        <Input
-                            id="cv"
-                            type="file"
-                            disabled={isLoading}
-                            {...register('cv')}
-                        />
+                        {from === 'candidate' && (
+                            <>
+                                <Label htmlFor="cv">CV (opcional)</Label>
+                                <Input
+                                    id="cv"
+                                    type="file"
+                                    disabled={isLoading}
+                                    {...register('cv')}
+                                />
+                            </>
+                        )}
                     </div>
                     <Button variant="secondary" disabled={isLoading}>
                         {isLoading && (
