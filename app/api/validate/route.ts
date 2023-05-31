@@ -51,8 +51,6 @@ export async function POST(request: Request) {
 
     const data = getMark(completion.data.choices[0].message?.content!) ?? ''
 
-    console.log(data)
-
     try {
         return NextResponse.json({ data })
     } catch {
