@@ -11,13 +11,9 @@ const openai = new OpenAIApi(configuration)
 const INITIAL_MESSAGES = [
     {
         role: ChatCompletionRequestMessageRoleEnum.System,
-        content: `Eres un corrector de tests. Quiero que puntues con una nota del 1 al 10 las siguientes respuestas. Cada respuesta tiene que valer lo mismo, y debe puntuarse con 0 si no se contesta o si la respuesta no tiene sentido o no se relaciona con la pregunta.
-
-        El formato de tu respuesta tiene que ser la media de las notas de cada respuesta. Si la primera respuesta la puntúas con un 5 y la segunda con un 10, tu respuesta tiene que ser 7.5. El formato de respuesta es únicamente la nota, sin texto adicional.
-
-        Por ejemplo, si te doy un array con dos preguntas ["¿Qué es useState en React y para qué se utiliza?", "¿Cuál es el propósito principal de useEffect en React?"] y las respuestas ["useState es un hook que se utiliza para manejar el estado de un componente en React", "No lo sé"], debido a que una resupuesta es correcta y la otra no, la respuesta, siendo esta la media de las notas de las dos preguntas (10 y 0), debe ser:
+        content: `Quiero que me digas qué nota del 0 al 10 pondrías al siguiente conjunto de respuestas. Quiero que tu respuesta siga exactamente el siguiente formato:
         
-        5`,
+        {nota-total: 7}`,
     },
 ]
 
@@ -38,16 +34,24 @@ export async function POST(request: Request) {
             {
                 role: ChatCompletionRequestMessageRoleEnum.User,
                 content: `
-                  Dadas estas preguntas: ${questions}. Puntúa las siguientes respuestas: ${answers} devolviendo únicamente un mensaje con el número de la nota del test, sin texto adicional.
+                  Estas son las preguntas: ${questions}. Y estas las respuestas: ${answers}. 
                 `,
             },
         ],
     })
 
-    console.log(completion.data)
-    console.log(completion.data.choices[0].message?.content)
+    function getMark(texto: string) {
+        const regex = /nota-total:\s(\d+)/
+        const resultado = regex.exec(texto)
+        if (resultado && resultado.length > 1) {
+            return resultado[1]
+        }
+        return null
+    }
 
-    const data = completion.data.choices[0].message?.content ?? ''
+    const data = getMark(completion.data.choices[0].message?.content!) ?? ''
+
+    console.log(data)
 
     try {
         return NextResponse.json({ data })
