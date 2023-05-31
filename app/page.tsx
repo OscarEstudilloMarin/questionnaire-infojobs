@@ -4,7 +4,6 @@ import { Database } from '@/lib/database.types'
 
 import CreateOfferBtn from './create-offer-btn'
 import OffersGrid from '@/components/offers-grid'
-import { Info } from 'lucide-react'
 import {
     Popover,
     PopoverContent,
@@ -32,7 +31,17 @@ export default async function Home() {
                     </Button>
                 </PopoverTrigger>
                 <PopoverContent align="end">
-                    Place content for the popover here.
+                    <div className="flex flex-col space-y-2">
+                        <p>1. Iniciar sesión como employer</p>
+                        <p>2. Crear oferta con formulario auto generado</p>
+                        <p>3. Cerrar sesión e iniciar como candidate</p>
+                        <p>4. Acceder a la oferta creada e inscribirse</p>
+                        <p>5. Volver a iniciar sesión como employer</p>
+                        <p>
+                            6. Acceder a la oferta creada y ver las
+                            inscripciones
+                        </p>
+                    </div>
                 </PopoverContent>
             </Popover>
 
