@@ -50,6 +50,7 @@
         "zustand": "^4.3.8"
     },
     "devDependencies": {
+        "@netlify/plugin-nextjs": "^4.29.5-appdir.0",
         "encoding": "^0.1.13",
         "eslint-config-prettier": "8.8.0",
         "prettier": "2.8.8",
