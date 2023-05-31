@@ -23,7 +23,7 @@ const OfferPreview = ({
 }: OfferPreviewProps): JSX.Element => {
     return (
         <div className="flex flex-col rounded-lg bg-white pb-8">
-            <div className="flex h-40 w-full rounded-t-lg bg-slate-300">
+            <div className="flex h-40 w-full items-center justify-center overflow-hidden rounded-t-lg bg-slate-300">
                 {banner_image && (
                     <img
                         alt="banner-image"
