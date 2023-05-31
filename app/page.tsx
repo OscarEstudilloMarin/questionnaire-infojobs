@@ -32,6 +32,24 @@ export default async function Home() {
                 </PopoverTrigger>
                 <PopoverContent align="end">
                     <div className="flex flex-col space-y-2">
+                        <div className="flex flex-col">
+                            <p>
+                                Podéis crear una cuenta o bien usar los
+                                siguientes usuarios de test:
+                            </p>
+                            <p className="font-semibold underline">CANDIDATE</p>
+                            <p>
+                                Username: candidate@test.com Password:
+                                Candidate123!
+                            </p>
+                            <p className="font-semibold underline">EMPLOYER</p>
+                            <p>
+                                Username: employer@test.com Password:
+                                Employer123!
+                            </p>
+                        </div>
+
+                        <p className="font-semibold underline">PASOS</p>
                         <p>1. Iniciar sesión como employer</p>
                         <p>2. Crear oferta con formulario auto generado</p>
                         <p>3. Cerrar sesión e iniciar como candidate</p>
